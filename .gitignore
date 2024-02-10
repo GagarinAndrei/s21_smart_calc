@@ -50,3 +50,4 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+build-qt_smart_calc-Desktop_x86_darwin_generic_mach_o_64bit-Debug

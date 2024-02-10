@@ -31,11 +31,20 @@ typedef struct Node {
   token_enum type;
   double value;
   struct Node *next;
-} token;
+} Token;
 
-void push(int priority, token_enum type, double value, token **stackList);
-token pop(token **stackList);
-token peak(token **stackList);
-int type(token **top);
+typedef struct {
+  size_t stackSize;
+  Token *top;
+} Stack;
+
+
+void init(Stack *stackList);
+void push(int priority, token_enum type, double value, Stack *stack);
+Token pop(Stack *stack);
+Token peak(const Stack *stack);
+void printStack(const Stack *stack);
+void destroy(Stack *stack);
+// int type(Stack **top);
 
 #endif

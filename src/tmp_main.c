@@ -1,19 +1,21 @@
 
 #include "model/string_parcer.h"
 #include "model/token_stack.h"
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 int main(void) {
-  char *string = "sdf 345.345sdfsd600f";
+  char *string = "s 123.456ab600f 234";
+  Stack operands;
+  Stack operators;
+  init(&operands);
+  init(&operators);
+  parceString(string, &operators, &operands);
+  //===============================
+
 
   //===============================
-  double num = stringToDouble(string);
-  //===============================
 
-  printf("%lf\n", num);
-
+  printStack(&operands);
+  destroy(&operands);
+  destroy(&operators);
   return 0;
 }

@@ -1,5 +1,5 @@
 # all, install, uninstall, clean, dvi, dist, test, gcov_report
-GCC=gcc
+GCC=gcc -g
 CFALGS=-Wall -Werror -Wextra -std=c11
 SOURCES=tmp_main.c model/token_stack.c model/string_parcer.c
 TESTS_SOURCES=tests/*.c

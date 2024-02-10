@@ -4,7 +4,7 @@
 #include <math.h>
 
 
-void parceString(char *string, token **operators, token **operands);
+void parceString(char *string, Stack *operators, Stack *operands);
 int isDigit(char c);
 double stringToDouble(const char *string);
 

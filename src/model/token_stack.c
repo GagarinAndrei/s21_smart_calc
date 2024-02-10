@@ -1,26 +1,49 @@
 #include "token_stack.h"
+#include <stdio.h>
 #include <stdlib.h>
 
-void push(int priority, token_enum type, double value, token **top) {
-  token *newNode = malloc(sizeof(token));
+void init(Stack *stack) {
+  stack->stackSize = 0;
+  stack->top = NULL;
+}
+
+void push(int priority, token_enum type, double value, Stack *stack) {
+  Token *newNode = malloc(sizeof(Token));
   newNode->priority = priority;
   newNode->type = type;
   newNode->value = value;
-  newNode->next = *top;
-  *top = newNode;
+  newNode->next = stack->top;
+  stack->stackSize++;
+  stack->top = newNode;
 }
 
-token pop(token **top) {
-  token *node = *top;
+Token pop(Stack *stack) {
+  Token *node = stack->top;
   if (node)
-    free(*top);
-  *top = node->next;
+    free(stack->top);
+  stack->top = node->next;
+  stack->stackSize--;
   return *node;
 }
 
-token peak(token **stackList) {
-  token *topNode = *stackList;
-  return *topNode;
+Token peak(const Stack *stack) { return *stack->top; }
+
+void destroy(Stack *stack) {
+
+  Token *ptr_top = stack->top;
+  while (ptr_top != NULL) {
+    Token *tmp = ptr_top;
+    ptr_top = ptr_top->next;
+    free(tmp);
+  }
+  stack->stackSize = 0;
+  stack->top = NULL;
 }
 
-int type(token **top) { return (*top)->type; }
+void printStack(const Stack *stack) {
+  Token *ptr = stack->top;
+  while (ptr != NULL) {
+    printf("%f ", ptr->value);
+    ptr = ptr->next;
+  }
+}
