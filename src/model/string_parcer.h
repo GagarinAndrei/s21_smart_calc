@@ -6,6 +6,6 @@
 
 void parceString(char *string, token **operators, token **operands);
 int isDigit(char c);
-
+double stringToDouble(const char *string);
 
 #endif
