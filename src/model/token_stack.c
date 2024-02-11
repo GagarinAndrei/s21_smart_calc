@@ -1,4 +1,5 @@
 #include "token_stack.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,8 +20,7 @@ void push(int priority, token_enum type, double value, Stack *stack) {
 
 Token pop(Stack *stack) {
   Token *node = stack->top;
-  if (node)
-    free(stack->top);
+  if (node) free(stack->top);
   stack->top = node->next;
   stack->stackSize--;
   return *node;
@@ -29,7 +29,6 @@ Token pop(Stack *stack) {
 Token peak(const Stack *stack) { return *stack->top; }
 
 void destroy(Stack *stack) {
-
   Token *ptr_top = stack->top;
   while (ptr_top != NULL) {
     Token *tmp = ptr_top;
@@ -46,4 +45,5 @@ void printStack(const Stack *stack) {
     printf("%f ", ptr->value);
     ptr = ptr->next;
   }
+  printf("-=END_OF_STACK=-\n");
 }

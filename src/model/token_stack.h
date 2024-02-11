@@ -11,8 +11,8 @@ typedef enum {
   MULT = 6,
   POW = 7,
   MOD = 8,
-  UNARM_LEXEME = 9,
-  UNARP_LEXEME = 10,
+  UNAR_MINUS = 9,
+  UNAR_PLUS = 10,
   COS = 11,
   SIN = 12,
   TAN = 13,
@@ -39,12 +39,23 @@ typedef struct {
 } Stack;
 
 
+/** Инициализация стэка
+* @param Stack *stackList - казатель на стэк 
+*/
 void init(Stack *stackList);
+
+/** Помещаем новый узел в стэк
+* @param int priority
+* @param token_enum type
+* @param double value
+* @param Stack *stack 
+*/
 void push(int priority, token_enum type, double value, Stack *stack);
+
+
 Token pop(Stack *stack);
 Token peak(const Stack *stack);
 void printStack(const Stack *stack);
 void destroy(Stack *stack);
-// int type(Stack **top);
 
 #endif

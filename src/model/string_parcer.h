@@ -3,9 +3,7 @@
 #include "token_stack.h"
 #include <math.h>
 
-
-void parceString(char *string, Stack *operators, Stack *operands);
-int isDigit(char c);
+void parceString(char *string, Stack *operators, Stack *output);
 double stringToDouble(const char *string);
 
 #endif
