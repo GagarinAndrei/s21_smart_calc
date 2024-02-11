@@ -51,3 +51,12 @@ Module.symvers
 Mkfile.old
 dkms.conf
 build-qt_smart_calc-Desktop_x86_darwin_generic_mach_o_64bit-Debug
+CHANGELOG
+LICENSE
+code-samples/
+data-samples/
+datasets/
+materials/
+misc/
+src/.DS_Store
+src/s21_smart_calc
