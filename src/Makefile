@@ -1,7 +1,7 @@
 # all, install, uninstall, clean, dvi, dist, test, gcov_report
 GCC=gcc -g
 CFALGS=-Wall -Werror -Wextra -std=c11
-SOURCES=tmp_main.c model/token_stack.c model/string_parcer.c
+SOURCES=tmp_main.c model/token_stack.c model/string_parcer.c utils.c
 TESTS_SOURCES=tests/*.c
 OBJECTS=$(SOURCES:.c=.o)
 
@@ -33,8 +33,9 @@ all: clean
 clean:
 	rm -rf s21_matrix *.a $(OBJECTS) a.out *.gcno *.gcda report report.info *.dSYM
 
-valgrind: clean test
-	valgrind --tool=memcheck --leak-check=yes  ./s21_matrix
+valgrind: clean
+	$(GCC) $(CFALGS) $(SOURCES) $(CHECKFLAGS) -o s21_smart_calc
+	valgrind --tool=memcheck --leak-check=yes  ./s21_smart_calc
 
 clangn:
 	clang-format -n -style=google $(SOURCES) *.h tests/*.c tests/*.h
