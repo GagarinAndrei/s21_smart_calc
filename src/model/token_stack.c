@@ -1,18 +1,15 @@
-#include "token_stack.h"
-
-#include <stdio.h>
-#include <stdlib.h>
+#include "../headers/token_stack.h"
 
 void init(Stack *stack) {
   stack->stackSize = 0;
   stack->top = NULL;
 }
 
-void push(int priority, token_enum type, double value, Stack *stack) {
+void push(int priority, char operation, Stack *stack) {
   Token *newNode = malloc(sizeof(Token));
   newNode->priority = priority;
-  newNode->type = type;
-  newNode->value = value;
+  // newNode->type = type;
+  newNode->operation = operation;
   newNode->next = stack->top;
   stack->stackSize++;
   stack->top = newNode;
@@ -42,7 +39,7 @@ void destroy(Stack *stack) {
 void printStack(const Stack *stack) {
   Token *ptr = stack->top;
   while (ptr != NULL) {
-    printf("%f ", ptr->value);
+    printf("%c ", ptr->operation);
     ptr = ptr->next;
   }
   printf("-=END_OF_STACK=-\n");

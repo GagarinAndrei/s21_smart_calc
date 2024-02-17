@@ -1,76 +1,70 @@
-#include "string_parcer.h"
+#include "../headers/string_parcer.h"
 
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-#include "token_stack.h"
-
-void parceString(char *string, Stack *operators, Stack *output) {
-  double tmp_number;
-  char *ptr_string = string;
-  while (*ptr_string != '\0') {
-    if (isdigit(*ptr_string)) {
-      tmp_number = atof(ptr_string);
-      do {
-        ptr_string++;
-      } while (isdigit(*ptr_string) || *ptr_string == '.');
-      push(1, DIGIT, tmp_number, output);
+void parceString(char *inputString, Stack *operators, char *output) {
+  // double tmp_number;
+  // char *space = " ";
+  char *ptrInputString = inputString;
+  while (*ptrInputString != '\0') {
+    if (isdigit(*ptrInputString) || *ptrInputString == '.') {
+      strncat(output, ptrInputString, 1);
+      // tmp_number = atof(ptr_string);
+      // do {
+      // ptr_string++;
+      // } while (isdigit(*ptr_string) || *ptr_string == '.');
+      // push(1, tmp_number, operators);
+    } else {
+      switch (*ptrInputString) {
+        case 'x':
+        case '(':
+          push(0, *ptrInputString, operators);
+          break;
+        case ')':
+          while (peak(operators).operation != '(') {
+            char tmp = peak(operators).operation;
+            strncat(output, &tmp, 1);
+            pop(operators);
+          }
+          pop(operators);
+          break;
+          break;
+        case '+':
+        case '-':
+          push(2, *ptrInputString, operators);
+          break;
+        case '*':
+        case '/':
+        case '^':
+          push(3, *ptrInputString, operators);
+          break;
+      }
+      printf("OUTPUT:%s\n", output);
+      printStack(operators);
     }
-
-    switch (*ptr_string) {
-      case 'x':
-      case '(':
-        push(0, LEFT_PARENTHESIS, 0, operators);
-        ptr_string++;
-        break;
-      case ')':
-        while (operators->stackSize > 0 && peak(operators).type != '(') {
-          Token tmp_token = {0};
-          tmp_token = pop(operators);
-          push(tmp_token.priority, tmp_token.type, tmp_token.value, output);
-        }
-        push(0, RIGHT_PARENTHESIS, 0, output);
-        ptr_string++;
-        break;
-        push(1, X, 0, output);
-        ptr_string++;
-        break;
-      case '+':
-      case '-':
-        push(2, MINUS, 0, operators);
-        ptr_string++;
-        break;
-      case '*':
-      case '/':
-      case '^':
-        push(3, POW, 0, operators);
-        ptr_string++;
-        break;
-    }
-    printStack(output);
+    ptrInputString++;
   }
-  // if (!string) {
-  //   push(1, 1, 0, operators);
-  // }
+  while (operators->stackSize != 0) {
+    char buffer = pop(operators).operation;
+    strncat(output, &buffer, 1);
+  }
 }
 
-double stringToDouble(const char *string) {
-  double num = 0;
-  char *string_num;
-  string_num = malloc(256 * sizeof(char));
-  char *ptr_string_num = string_num;
+// double stringToDouble(const char *string) {
+//   double num = 0;
+//   char *string_num;
+//   string_num = malloc(256 * sizeof(char));
+//   char *ptr_string_num = string_num;
 
-  while (*string) {
-    if (isdigit(*string) || *string == '.') {
-      *ptr_string_num = *string;
-      ptr_string_num++;
-      if (!(isdigit(*(string + 1)) || *(string + 1) == '.')) break;
-    }
-    string++;
-  }
-  *ptr_string_num = '\0';
-  printf("%s\n", string_num);
-  num = atof(string_num);
-  return num;
-}
+//   while (*string) {
+//     if (isdigit(*string) || *string == '.') {
+//       *ptr_string_num = *string;
+//       ptr_string_num++;
+//       if (!(isdigit(*(string + 1)) || *(string + 1) == '.'))
+//         break;
+//     }
+//     string++;
+//   }
+//   *ptr_string_num = '\0';
+//   printf("%s\n", string_num);
+//   num = atof(string_num);
+//   return num;
+// }

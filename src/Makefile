@@ -13,35 +13,38 @@ else
 endif
 
 all: clean
-# s21_matrix.a
+# s21_smart_calc.a
 
-# s21_matrix.a:
+# s21_smart_calc.a:
 # 	$(GCC) $(CFALGS) $(SOURCES) -c
-# 	ar rcs s21_matrix.a $(OBJECTS)
+# 	ar rcs s21_smart_calc.a $(OBJECTS)
 
-# test: clean s21_matrix.a
-# 	$(GCC) $(CFALGS) $(TESTS_SOURCES) s21_matrix.a $(CHECKFLAGS) -o s21_matrix
-# 	./s21_matrix
+# test: clean s21_smart_calc.a
+# 	$(GCC) $(CFALGS) $(TESTS_SOURCES) s21_smart_calc.a $(CHECKFLAGS) -o s21_smart_calc
+# 	./s21_smart_calc
 
-# gcov_report: clean s21_matrix.a
-# 	$(GCC) $(CFALGS) $(TESTS_SOURCES) $(SOURCES) s21_matrix.a $(CHECKFLAGS) -fprofile-arcs -ftest-coverage -lgcov -o s21_matrix
-# 	./s21_matrix
-# 	lcov -t "./s21_matrix" -o report.info --no-external -c -d .
+# gcov_report: clean s21_smart_calc.a
+# 	$(GCC) $(CFALGS) $(TESTS_SOURCES) $(SOURCES) s21_smart_calc.a $(CHECKFLAGS) -fprofile-arcs -ftest-coverage -lgcov -o s21_smart_calc
+# 	./s21_smart_calc
+# 	lcov -t "./s21_smart_calc" -o report.info --no-external -c -d .
 # 	genhtml -o report report.info
 # 	open ./report/index.html
 
 clean:
-	rm -rf s21_matrix *.a $(OBJECTS) a.out *.gcno *.gcda report report.info *.dSYM
+	rm -rf s21_smart_calc *.a $(OBJECTS) a.out *.gcno *.gcda report report.info *.dSYM
 
 valgrind: clean test
-	valgrind --tool=memcheck --leak-check=yes  ./s21_matrix
+	valgrind --tool=memcheck --leak-check=yes  ./s21_smart_calc
+
+leaks: main
+	leaks -atExit -- ./s21_smart_calc | grep LEAK:
 
 clangn:
-	clang-format -n -style=google $(SOURCES) *.h tests/*.c tests/*.h
+	clang-format -n -style=google $(SOURCES) headers/*.h tests/*.c tests/*.h
 
 clangi:
-	clang-format -i -style=google $(SOURCES) *.h tests/*.c tests/*.h
+	clang-format -i -style=google $(SOURCES) headers/*.h
 
 main: clean
-	$(GCC) $(CFALGS) $(SOURCES) $(CHECKFLAGS) -o s21_smart_calc
+	$(GCC) $(CFALGS) $(SOURCES) -o s21_smart_calc
 	./s21_smart_calc
