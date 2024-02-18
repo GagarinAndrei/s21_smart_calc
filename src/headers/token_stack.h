@@ -2,16 +2,17 @@
 #define TOKEN_STACK_H
 #include <stdio.h>
 #include <stdlib.h>
+
+#define OPERATOR 0
+#define VALUE 1
 // #include "smart_calc.h"
 
 typedef enum {
   OPEN_PARENTHESIS,
-  CLOSE_PARENTHESIS,
+  CLOSE_PARENTHESIS = 0,
+  PLUS_MINUS,
+  MULT_DIV,
   POW,
-  MULT,
-  DIV = 3,
-  MINUS,
-  PLUS = 4,
   //==========
   MOD,
   UNAR_MINUS,
@@ -31,6 +32,7 @@ typedef struct Node {
   int priority;
   // token_enum type;
   char operation;
+  long double value;
   struct Node *next;
 } Token;
 
@@ -48,14 +50,14 @@ void init(Stack *stackList);
 /**
  * @brief Помещаем новый узел в стэк
  * @param int priority
- * @param token_enum type
- * @param double value
+ * @param char operation
+ * @param long double value
  * @param Stack *stack
  */
-void push(int priority, char operation, Stack *stack);
+void push(int priority, char operation, long double value, Stack *stack);
 Token pop(Stack *stack);
 Token peak(const Stack *stack);
-void printStack(const Stack *stack);
 void destroy(Stack *stack);
 
+void printStack(const Stack *stack, int stackType);
 #endif
