@@ -69,10 +69,6 @@ void parceString(char *inputString, Stack *operators, Stack *values) {
     long double calcResult = valuesCalculation(values, operators);
     push(0, 0, calcResult, values);
   }
-  // while (operators->stackSize != 0) {
-  //   char buffer = pop(operators).operation;
-  //   // strncat(output, &buffer, 1);
-  // }
 }
 
 int isHigherPriority(const Stack *operators, int priority) {
@@ -109,24 +105,3 @@ long double valuesCalculation(Stack *values, Stack *operators) {
   }
   return result;
 }
-
-// double stringToDouble(const char *string) {
-//   double num = 0;
-//   char *string_num;
-//   string_num = malloc(256 * sizeof(char));
-//   char *ptr_string_num = string_num;
-
-//   while (*string) {
-//     if (isdigit(*string) || *string == '.') {
-//       *ptr_string_num = *string;
-//       ptr_string_num++;
-//       if (!(isdigit(*(string + 1)) || *(string + 1) == '.'))
-//         break;
-//     }
-//     string++;
-//   }
-//   *ptr_string_num = '\0';
-//   printf("%s\n", string_num);
-//   num = atof(string_num);
-//   return num;
-// }

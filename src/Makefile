@@ -33,7 +33,7 @@ all: clean
 clean:
 	rm -rf s21_smart_calc *.a $(OBJECTS) a.out *.gcno *.gcda report report.info *.dSYM
 
-valgrind: clean test
+valgrind: clean main
 	valgrind --tool=memcheck --leak-check=yes  ./s21_smart_calc
 
 leaks: main
@@ -46,5 +46,5 @@ clangi:
 	clang-format -i -style=google $(SOURCES) headers/*.h
 
 main: clean
-	$(GCC) $(CFALGS) $(SOURCES) -o s21_smart_calc
+	$(GCC) $(CFALGS) $(SOURCES) $(CHECKFLAGS) -o s21_smart_calc
 	./s21_smart_calc

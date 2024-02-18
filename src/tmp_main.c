@@ -6,8 +6,8 @@
 #include <stdio.h>
 
 int main(void) {
-  char *string = "(1+2)*3^2^2-6/(7+8/9)";
-  // char *string = "5/2 - (1 + 2.5) * 3^4";
+  // char *string = "(1+2)*3^2^2-6/(7+8/9)";
+  char *string = "5/2 - (1 + 2.5) * 3^4";
   // char *string = "2*(3+5/2)";
   printf("\033[42mINPUT_STRING:\033[0m %s\n", string);
   // char *output = (char *)calloc(255, sizeof(char));
