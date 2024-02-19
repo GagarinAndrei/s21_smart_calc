@@ -6,22 +6,37 @@ void init(Stack *stack) {
 }
 
 void push(int priority, char operation, long double value, Stack *stack) {
-  Token *newNode = malloc(sizeof(Token));
+  Token *newNode = (Token*)malloc(sizeof(Token));
+  if (newNode) {
+
   newNode->priority = priority;
   newNode->operation = operation;
   newNode->value = value;
   newNode->next = stack->top;
   stack->stackSize++;
   stack->top = newNode;
+  }
 }
 
-Token pop(Stack *stack) {
-  Token *node = stack->top;
-  if (node)
-    free(stack->top);
-  stack->top = node->next;
+long double popValue(Stack *stack) {
+  Token *tmpNode = stack->top;
+  long double value = tmpNode->value;
+  stack->top = stack->top->next;
   stack->stackSize--;
-  return *node;
+  if (tmpNode)
+    free(stack->top);
+
+  return value;
+}
+char popOperator(Stack *stack) {
+  Token *tmpNode = stack->top;
+  char operation = tmpNode->operation;
+  stack->top = stack->top->next;
+  stack->stackSize--;
+  if (tmpNode)
+    free(stack->top);
+
+  return operation;
 }
 
 Token peak(const Stack *stack) { return *stack->top; }

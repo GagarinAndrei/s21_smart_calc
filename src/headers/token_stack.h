@@ -55,7 +55,8 @@ void init(Stack *stackList);
  * @param Stack *stack
  */
 void push(int priority, char operation, long double value, Stack *stack);
-Token pop(Stack *stack);
+long double popValue(Stack *stack);
+char popOperator(Stack *stack);
 Token peak(const Stack *stack);
 void destroy(Stack *stack);
 
