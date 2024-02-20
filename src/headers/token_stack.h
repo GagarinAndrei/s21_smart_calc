@@ -2,10 +2,10 @@
 #define TOKEN_STACK_H
 #include <stdio.h>
 #include <stdlib.h>
+// #include "dijkstra_algorithm.h"
 
 #define OPERATOR 0
 #define VALUE 1
-// #include "smart_calc.h"
 
 typedef enum {
   OPEN_PARENTHESIS,
