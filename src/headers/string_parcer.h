@@ -6,7 +6,9 @@
 
 #include "token_stack.h"
 
-void parceString(char *string, Stack *operators, Stack *values);
+void dijkstraAlgorithm(char *string, Stack *operators, Stack *values);
+char *parceOperator(char *ptrInputString, Stack *operators, Stack *values);
+char* parceValue(char *ptrInputString, Stack *values); 
 int isCurrentHigherOrEqualPriority(const Stack *operators, int priority);
 long double valuesCalculation(Stack *values, Stack *operators);
 void calculationLogic(Stack *operators, Stack *values, char currentChar,

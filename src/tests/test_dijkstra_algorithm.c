@@ -8,7 +8,7 @@ START_TEST(dijkstra_0) {
   Stack operators, values;
   init(&operators);
   init(&values);
-  parceString(string, &operators, &values);
+  dijkstraAlgorithm(string, &operators, &values);
   ck_assert_double_eq_tol(reference, peak(&values).value, ACCURACY);
   destroy(&operators);
   destroy(&values);
@@ -20,7 +20,7 @@ START_TEST(dijkstra_1) {
   Stack operators, values;
   init(&operators);
   init(&values);
-  parceString(string, &operators, &values);
+  dijkstraAlgorithm(string, &operators, &values);
   ck_assert_double_eq_tol(reference, peak(&values).value, ACCURACY);
   destroy(&operators);
   destroy(&values);
@@ -32,7 +32,7 @@ START_TEST(dijkstra_2) {
   Stack operators, values;
   init(&operators);
   init(&values);
-  parceString(string, &operators, &values);
+  dijkstraAlgorithm(string, &operators, &values);
   ck_assert_double_eq_tol(reference, peak(&values).value, ACCURACY);
   destroy(&operators);
   destroy(&values);
@@ -44,7 +44,7 @@ START_TEST(dijkstra_3) {
   Stack operators, values;
   init(&operators);
   init(&values);
-  parceString(string, &operators, &values);
+  dijkstraAlgorithm(string, &operators, &values);
   ck_assert_double_eq_tol(reference, peak(&values).value, ACCURACY);
   destroy(&operators);
   destroy(&values);
@@ -56,7 +56,7 @@ START_TEST(dijkstra_4) {
   Stack operators, values;
   init(&operators);
   init(&values);
-  parceString(string, &operators, &values);
+  dijkstraAlgorithm(string, &operators, &values);
   ck_assert_double_eq_tol(reference, peak(&values).value, ACCURACY);
   destroy(&operators);
   destroy(&values);
@@ -70,7 +70,7 @@ START_TEST(dijkstra_5) {
   init(&values);
   // printf("\033[44mINPUT_STRING: %s\033[0m\n", string);
   // printf("\033[44mREFERENCE: %Lf\033[0m\n", reference);
-  parceString(string, &operators, &values);
+  dijkstraAlgorithm(string, &operators, &values);
   ck_assert_double_eq_tol(reference, peak(&values).value, ACCURACY);
   destroy(&operators);
   destroy(&values);
