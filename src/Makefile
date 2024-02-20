@@ -1,7 +1,7 @@
 # all, install, uninstall, clean, dvi, dist, test, gcov_report
 GCC=gcc -g
 CFALGS=-Wall -Werror -Wextra -std=c11
-SOURCES=tmp_main.c model/token_stack.c model/string_parcer.c
+SOURCES=model/token_stack.c model/dijkstra_algorithm.c
 TESTS_SOURCES=tests/tests.c tests/test_dijkstra_algorithm.c 
 OBJECTS=$(SOURCES:.c=.o)
 

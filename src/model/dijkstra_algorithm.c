@@ -1,4 +1,4 @@
-#include "../headers/string_parcer.h"
+#include "../headers/dijkstra_algorithm.h"
 
 void dijkstraAlgorithm(char *inputString, Stack *operators, Stack *values) {
   char *ptrInputString = inputString;
@@ -17,34 +17,34 @@ void dijkstraAlgorithm(char *inputString, Stack *operators, Stack *values) {
 
 char *parceOperator(char *ptrInputString, Stack *operators, Stack *values) {
   switch (*ptrInputString) {
-  case 'x':
-  case '(':
-    push(OPEN_PARENTHESIS, *ptrInputString, 0, operators);
-    ptrInputString++;
-    break;
-  case ')':
-    while (peak(operators).operation != '(' && operators->stackSize != 0) {
-      push(0, 0, valuesCalculation(values, operators), values);
-    }
-    popOperator(operators);
-    ptrInputString++;
-    break;
-  case '+':
-  case '-':
-    calculationLogic(operators, values, *ptrInputString, PLUS_MINUS);
-    ptrInputString++;
-    break;
-  case '*':
-  case '/':
-    calculationLogic(operators, values, *ptrInputString, MULT_DIV);
-    ptrInputString++;
-    break;
-  case '^':
-    calculationLogic(operators, values, *ptrInputString, POW);
-    ptrInputString++;
-    break;
-  default:
-    ptrInputString++;
+    case 'x':
+    case '(':
+      push(OPEN_PARENTHESIS, *ptrInputString, 0, operators);
+      ptrInputString++;
+      break;
+    case ')':
+      while (peak(operators).operation != '(' && operators->stackSize != 0) {
+        push(0, 0, valuesCalculation(values, operators), values);
+      }
+      popOperator(operators);
+      ptrInputString++;
+      break;
+    case '+':
+    case '-':
+      calculationLogic(operators, values, *ptrInputString, PLUS_MINUS);
+      ptrInputString++;
+      break;
+    case '*':
+    case '/':
+      calculationLogic(operators, values, *ptrInputString, MULT_DIV);
+      ptrInputString++;
+      break;
+    case '^':
+      calculationLogic(operators, values, *ptrInputString, POW);
+      ptrInputString++;
+      break;
+    default:
+      ptrInputString++;
   }
   return ptrInputString;
 }
@@ -83,21 +83,21 @@ long double valuesCalculation(Stack *values, Stack *operators) {
   a = popValue(values);
   b = popValue(values);
   switch (popOperator(operators)) {
-  case '+':
-    result = a + b;
-    break;
-  case '-':
-    result = b - a;
-    break;
-  case '*':
-    result = a * b;
-    break;
-  case '/':
-    result = b / a;
-    break;
-  case '^':
-    result = pow(b, a);
-    break;
+    case '+':
+      result = a + b;
+      break;
+    case '-':
+      result = b - a;
+      break;
+    case '*':
+      result = a * b;
+      break;
+    case '/':
+      result = b / a;
+      break;
+    case '^':
+      result = pow(b, a);
+      break;
   }
   return result;
 }
