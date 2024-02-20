@@ -2,7 +2,7 @@
 GCC=gcc -g
 CFALGS=-Wall -Werror -Wextra -std=c11
 SOURCES=tmp_main.c model/token_stack.c model/string_parcer.c
-TESTS_SOURCES=tests/*.c
+TESTS_SOURCES=tests/tests.c tests/test_dijkstra_algorithm.c 
 OBJECTS=$(SOURCES:.c=.o)
 
 ifeq ($(shell uname), Linux)
@@ -13,15 +13,10 @@ else
 endif
 
 all: clean
-# s21_smart_calc.a
 
-# s21_smart_calc.a:
-# 	$(GCC) $(CFALGS) $(SOURCES) -c
-# 	ar rcs s21_smart_calc.a $(OBJECTS)
-
-# test: clean s21_smart_calc.a
-# 	$(GCC) $(CFALGS) $(TESTS_SOURCES) s21_smart_calc.a $(CHECKFLAGS) -o s21_smart_calc
-# 	./s21_smart_calc
+test: clean
+	$(GCC) $(CFALGS) $(TESTS_SOURCES) $(SOURCES) $(CHECKFLAGS) -o s21_smart_calc
+	./s21_smart_calc
 
 # gcov_report: clean s21_smart_calc.a
 # 	$(GCC) $(CFALGS) $(TESTS_SOURCES) $(SOURCES) s21_smart_calc.a $(CHECKFLAGS) -fprofile-arcs -ftest-coverage -lgcov -o s21_smart_calc
@@ -43,7 +38,7 @@ clangn:
 	clang-format -n -style=google $(SOURCES) headers/*.h tests/*.c tests/*.h
 
 clangi:
-	clang-format -i -style=google $(SOURCES) headers/*.h
+	clang-format -i -style=google $(SOURCES) headers/*.h $(TESTS_SOURCES)
 
 main: clean
 	$(GCC) $(CFALGS) $(SOURCES) $(CHECKFLAGS) -o s21_smart_calc

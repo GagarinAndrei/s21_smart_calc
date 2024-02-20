@@ -10,9 +10,6 @@ void parceString(char *inputString, Stack *operators, Stack *values) {
         ptrInputString++;
       } while (isdigit(*ptrInputString) || *ptrInputString == '.');
       push(0, 0, tmp_number, values);
-      printf("===============================================\n");
-      printStack(operators, OPERATOR);
-      printStack(values, VALUE);
     } else {
       switch (*ptrInputString) {
         case 'x':
@@ -21,53 +18,30 @@ void parceString(char *inputString, Stack *operators, Stack *values) {
           ptrInputString++;
           break;
         case ')':
-          while (peak(operators).operation != '(') {
-            long double calcResult = valuesCalculation(values, operators);
-            push(0, 0, calcResult, values);
-            printStack(operators, OPERATOR);
-            printStack(values, VALUE);
+          while (peak(operators).operation != '(' &&
+                 operators->stackSize != 0) {
+            push(0, 0, valuesCalculation(values, operators), values);
           }
           popOperator(operators);
           ptrInputString++;
           break;
         case '+':
         case '-':
-          if (isHigherPriority(operators, PLUS_MINUS))
-            push(PLUS_MINUS, *ptrInputString, 0, operators);
-          else {
-            long double calcResult = valuesCalculation(values, operators);
-            push(0, 0, calcResult, values);
-            push(PLUS_MINUS, *ptrInputString, 0, operators);
-          }
+          calculationLogic(operators, values, *ptrInputString, PLUS_MINUS);
           ptrInputString++;
           break;
         case '*':
         case '/':
-          if (isHigherPriority(operators, MULT_DIV))
-            push(MULT_DIV, *ptrInputString, 0, operators);
-          else {
-            long double calcResult = valuesCalculation(values, operators);
-            push(0, 0, calcResult, values);
-            push(MULT_DIV, *ptrInputString, 0, operators);
-          }
+          calculationLogic(operators, values, *ptrInputString, MULT_DIV);
           ptrInputString++;
           break;
         case '^':
-          if (isHigherPriority(operators, POW))
-            push(POW, *ptrInputString, 0, operators);
-          else {
-            long double calcResult = valuesCalculation(values, operators);
-            push(0, 0, calcResult, values);
-            push(POW, *ptrInputString, 0, operators);
-          }
+          calculationLogic(operators, values, *ptrInputString, POW);
           ptrInputString++;
           break;
         default:
           ptrInputString++;
       }
-      printf("===============================================\n");
-      printStack(operators, OPERATOR);
-      printStack(values, VALUE);
     }
   }
   while (operators->stackSize != 0) {
@@ -76,35 +50,45 @@ void parceString(char *inputString, Stack *operators, Stack *values) {
   }
 }
 
-int isHigherPriority(const Stack *operators, int priority) {
+int isCurrentHigherOrEqualPriority(const Stack *operators,
+                                   int currentPriority) {
   int result = 0;
   if (operators->stackSize > 0) {
     int inStackOperatorPriority = peak(operators).priority;
-    result = inStackOperatorPriority < priority;
+    result = inStackOperatorPriority <= currentPriority;
   }
-  if (operators->stackSize == 0) result = 1;
   return result;
+}
+
+void calculationLogic(Stack *operators, Stack *values, char currentChar,
+                      int currentPriority) {
+  while (operators->stackSize != 0 &&
+         !isCurrentHigherOrEqualPriority(operators, currentPriority)) {
+    long double calcResult = valuesCalculation(values, operators);
+    push(0, 0, calcResult, values);
+  }
+  push(currentPriority, currentChar, 0, operators);
 }
 
 long double valuesCalculation(Stack *values, Stack *operators) {
   long double result, a, b;
-  b = popValue(values);
   a = popValue(values);
+  b = popValue(values);
   switch (popOperator(operators)) {
     case '+':
       result = a + b;
       break;
     case '-':
-      result = a - b;
+      result = b - a;
       break;
     case '*':
       result = a * b;
       break;
     case '/':
-      result = a / b;
+      result = b / a;
       break;
     case '^':
-      result = pow(a, b);
+      result = pow(b, a);
       break;
   }
   return result;

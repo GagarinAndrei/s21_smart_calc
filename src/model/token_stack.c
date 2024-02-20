@@ -1,41 +1,49 @@
 #include "../headers/token_stack.h"
 
+#include <math.h>
+
 void init(Stack *stack) {
   stack->stackSize = 0;
   stack->top = NULL;
 }
 
 void push(int priority, char operation, long double value, Stack *stack) {
-  Token *newNode = (Token*)malloc(sizeof(Token));
+  Token *newNode = (Token *)malloc(sizeof(Token));
   if (newNode) {
-
-  newNode->priority = priority;
-  newNode->operation = operation;
-  newNode->value = value;
-  newNode->next = stack->top;
-  stack->stackSize++;
-  stack->top = newNode;
+    newNode->priority = priority;
+    newNode->operation = operation;
+    newNode->value = value;
+    newNode->next = stack->top;
+    stack->stackSize++;
+    stack->top = newNode;
   }
 }
 
 long double popValue(Stack *stack) {
-  Token *tmpNode = stack->top;
-  long double value = tmpNode->value;
-  stack->top = stack->top->next;
+  long double value;
+  Token *nextNode = NULL;
+  if (stack->top == NULL) {
+    return NAN;
+  }
+  nextNode = stack->top->next;
+  value = stack->top->value;
+  free(stack->top);
+  stack->top = nextNode;
   stack->stackSize--;
-  if (tmpNode)
-    free(stack->top);
-
   return value;
 }
-char popOperator(Stack *stack) {
-  Token *tmpNode = stack->top;
-  char operation = tmpNode->operation;
-  stack->top = stack->top->next;
-  stack->stackSize--;
-  if (tmpNode)
-    free(stack->top);
 
+char popOperator(Stack *stack) {
+  char operation;
+  Token *nextNode = NULL;
+  if (stack->top == NULL) {
+    return -1;
+  }
+  nextNode = stack->top->next;
+  operation = stack->top->operation;
+  free(stack->top);
+  stack->top = nextNode;
+  stack->stackSize--;
   return operation;
 }
 
