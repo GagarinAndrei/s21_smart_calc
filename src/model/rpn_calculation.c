@@ -1,34 +1,34 @@
 #include "../headers/rpn_calculation.h"
+#include "../headers/dijkstra_algorithm.h"
 
-void calculationLogic(Stack *operators, Stack *values, char currentChar,
+void calculationLogic(Stack *operators, Stack *values, int currentOperator,
                       int currentPriority) {
-  while (operators->stackSize != 0 &&
-         !isCurrentHigherOrEqualPriority(operators, currentPriority)) {
+  while (operators->stackSize != 0 && !isCurrentHigherOrEqualPriority(operators, currentPriority)) {
     long double calcResult = valuesCalculation(values, operators);
     push(0, 0, calcResult, values);
   }
-  push(currentPriority, currentChar, 0, operators);
+  push(currentPriority, currentOperator, 0, operators);
 }
 
 long double valuesCalculation(Stack *values, Stack *operators) {
   long double result, a, b;
-  a = popValue(values);
   b = popValue(values);
+  a = popValue(values);
   switch (popOperator(operators)) {
-    case '+':
+    case PLUS:
       result = a + b;
       break;
-    case '-':
-      result = b - a;
+    case MINUS:
+      result = a - b;
       break;
-    case '*':
+    case MULT:
       result = a * b;
       break;
-    case '/':
-      result = b / a;
+    case DIV:
+      result = a / b;
       break;
-    case '^':
-      result = pow(b, a);
+    case POW:
+      result = pow(a, b);
       break;
   }
   return result;

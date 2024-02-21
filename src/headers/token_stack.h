@@ -2,42 +2,53 @@
 #define TOKEN_STACK_H
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 // #include "dijkstra_algorithm.h"
 
 #define OPERATOR 0
 #define VALUE 1
 
 typedef enum {
-  OPEN_PARENTHESIS,
-  CLOSE_PARENTHESIS = 0,
-  PLUS_MINUS,
-  MULT_DIV,
-  POW,
+  OPEN_PARENTHESIS = 0,
+  CLOSE_PARENTHESIS = 1,
+  PLUS = 2,
+  MINUS = 3,
+  MULT = 4,
+  DIV = 5,
+  POW = 6,
+  MOD = 7,
+  COS = 8,
+  SIN = 9,
+  TAN = 10,
+  ACOS = 11,
+  ASIN = 12,
+  ATAN = 13,
+  SQRT = 14,
+  LN = 15,
+  LOG = 16,
   //==========
-  MOD,
-  UNAR_MINUS,
-  UNAR_PLUS,
-  COS,
-  SIN,
-  TAN,
-  ACOS,
-  ASIN,
-  ATAN,
-  SQRT,
-  LN,
-  LOG,
+  UNAR_MINUS = 17,
+  UNAR_PLUS = 18
+} operationType;
+
+typedef enum {
+  CHUSHPAN,
+  SKORLUPA,
+  SUPERA,
+  STARSHAK,
+  AVTOR
 } operationPriority;
 
 typedef struct Node {
   int priority;
   // token_enum type;
-  char operation;
+  int operation;
   long double value;
   struct Node *next;
 } Token;
 
 typedef struct {
-  size_t stackSize;
+  int stackSize;
   Token *top;
 } Stack;
 
@@ -54,7 +65,7 @@ void init(Stack *stackList);
  * @param long double value
  * @param Stack *stack
  */
-void push(int priority, char operation, long double value, Stack *stack);
+void push(int priority, int operation, long double value, Stack *stack);
 long double popValue(Stack *stack);
 char popOperator(Stack *stack);
 Token peak(const Stack *stack);

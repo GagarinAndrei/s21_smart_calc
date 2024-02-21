@@ -1,8 +1,8 @@
 # all, install, uninstall, clean, dvi, dist, test, gcov_report
 GCC=gcc -g
 CFALGS=-Wall -Werror -Wextra -std=c11
-SOURCES=model/token_stack.c model/dijkstra_algorithm.c
-TESTS_SOURCES=tests/tests.c tests/test_dijkstra_algorithm.c 
+SOURCES=model/*.c
+TESTS_SOURCES=tests/*.c 
 OBJECTS=$(SOURCES:.c=.o)
 
 ifeq ($(shell uname), Linux)
@@ -18,12 +18,12 @@ test: clean
 	$(GCC) $(CFALGS) $(TESTS_SOURCES) $(SOURCES) $(CHECKFLAGS) -o s21_smart_calc
 	./s21_smart_calc
 
-# gcov_report: clean s21_smart_calc.a
-# 	$(GCC) $(CFALGS) $(TESTS_SOURCES) $(SOURCES) s21_smart_calc.a $(CHECKFLAGS) -fprofile-arcs -ftest-coverage -lgcov -o s21_smart_calc
-# 	./s21_smart_calc
-# 	lcov -t "./s21_smart_calc" -o report.info --no-external -c -d .
-# 	genhtml -o report report.info
-# 	open ./report/index.html
+gcov_report: test
+	$(GCC) $(CFALGS) $(TESTS_SOURCES) $(SOURCES) $(CHECKFLAGS) -fprofile-arcs -ftest-coverage -lgcov -o s21_smart_calc
+	./s21_smart_calc
+	lcov -t "./s21_smart_calc" -o report.info --no-external -c -d .
+	genhtml -o report report.info
+	open ./report/index.html
 
 clean:
 	rm -rf s21_smart_calc *.a $(OBJECTS) a.out *.gcno *.gcda report report.info *.dSYM

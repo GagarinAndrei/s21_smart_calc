@@ -6,6 +6,7 @@
 // #include "../headers/smart_calc.h"
 #include "../headers/dijkstra_algorithm.h"
 #include "../headers/token_stack.h"
+#include "../headers/rpn_calculation.h"
 
 Suite *testDijkstraAlgorithm(void);
 

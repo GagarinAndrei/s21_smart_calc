@@ -4,15 +4,15 @@
 #include <math.h>
 #include <string.h>
 
-// #include "token_stack.h"
-// #include "rpn_calculation.h"
+#include "token_stack.h"
+#include "rpn_calculation.h"
+#include <stdlib.h>
 
-void dijkstraAlgorithm(char *string, Stack *operators, Stack *values);
+
+long double dijkstraAlgorithm(char *string);
 char *parceOperator(char *ptrInputString, Stack *operators, Stack *values);
 char *parceValue(char *ptrInputString, Stack *values);
-// void calculationLogic(Stack *operators, Stack *values, char currentChar,
-//                       int currentPriority);
-// long double valuesCalculation(Stack *values, Stack *operators);
+char *parceFunction(char *ptrInputString, Stack *operators);
 int isCurrentHigherOrEqualPriority(const Stack *operators, int priority);
 
 #endif

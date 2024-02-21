@@ -1,13 +1,11 @@
 #include "../headers/token_stack.h"
 
-#include <math.h>
-
 void init(Stack *stack) {
   stack->stackSize = 0;
   stack->top = NULL;
 }
 
-void push(int priority, char operation, long double value, Stack *stack) {
+void push(int priority, int operation, long double value, Stack *stack) {
   Token *newNode = (Token *)malloc(sizeof(Token));
   if (newNode) {
     newNode->priority = priority;
