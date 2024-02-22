@@ -3,7 +3,7 @@
 #include "token_stack.h"
 
 void calculationLogic(Stack *operators, Stack *values, int currentOperator,
-                      int currentPriority);
-long double valuesCalculation(Stack *values, Stack *operators);
+                      int currentPriority, int *numberCounter);
+long double valuesCalculation(Stack *values, Stack *operators, int *numberCounter);
 
 #endif

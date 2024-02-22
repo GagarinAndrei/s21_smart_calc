@@ -5,12 +5,13 @@ void init(Stack *stack) {
   stack->top = NULL;
 }
 
-void push(int priority, int operation, long double value, Stack *stack) {
+void push(int priority, int operation, long double value, int isValueInBrackets, Stack *stack) {
   Token *newNode = (Token *)malloc(sizeof(Token));
   if (newNode) {
     newNode->priority = priority;
     newNode->operation = operation;
     newNode->value = value;
+    newNode->isValueInBrackets = isValueInBrackets;
     newNode->next = stack->top;
     stack->stackSize++;
     stack->top = newNode;
@@ -45,7 +46,8 @@ char popOperator(Stack *stack) {
   return operation;
 }
 
-Token peak(const Stack *stack) { return *stack->top; }
+Token peak(const Stack *stack) { 
+  return *stack->top; }
 
 void destroy(Stack *stack) {
   Token *ptr_top = stack->top;
@@ -62,7 +64,7 @@ void printStack(const Stack *stack, int stackType) {
   Token *ptr = stack->top;
   while (ptr != NULL) {
     if (stackType == OPERATOR)
-      printf("%c ", ptr->operation);
+      printf("%d ", ptr->operation);
     else
       printf("%Lf ", ptr->value);
     ptr = ptr->next;

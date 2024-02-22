@@ -41,9 +41,9 @@ typedef enum {
 
 typedef struct Node {
   int priority;
-  // token_enum type;
   int operation;
   long double value;
+  int isValueInBrackets;
   struct Node *next;
 } Token;
 
@@ -65,7 +65,7 @@ void init(Stack *stackList);
  * @param long double value
  * @param Stack *stack
  */
-void push(int priority, int operation, long double value, Stack *stack);
+void push(int priority, int operation, long double value, int isInBrackets, Stack *stack);
 long double popValue(Stack *stack);
 char popOperator(Stack *stack);
 Token peak(const Stack *stack);
