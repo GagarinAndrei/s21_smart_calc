@@ -46,7 +46,7 @@ char popOperator(Stack *stack) {
   return operation;
 }
 
-Token peak(const Stack *stack) { 
+Token peak(const Stack *stack) {
   return *stack->top; }
 
 void destroy(Stack *stack) {

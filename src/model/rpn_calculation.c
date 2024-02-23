@@ -17,34 +17,51 @@ void calculationLogic(Stack *operators, Stack *values, int currentOperator,
 
 long double valuesCalculation(Stack *values, Stack *operators,
                               int *numberCounter) {
-  long double result, a, b;
+  long double result, a = 0, b = 0;
   int isInBrackets = peak(values).isValueInBrackets;
   int valuesNumber;
-  b = popValue(values);
-  if (peak(values).isValueInBrackets && *numberCounter >= 1)
-    a = popValue(values);
+  // b = popValue(values);
+  // if (values->stackSize > 0) {
+  //   if ((peak(values).isValueInBrackets && *numberCounter > 1) ||
+  //       !peak(values).isValueInBrackets) {
+  //     a = popValue(values);
+  //   }
+  // }
+
   switch (popOperator(operators)) {
   case PLUS:
+    b = popValue(values);
+    a = popValue(values);
     result = a + b;
     valuesNumber = 1;
     break;
   case MINUS:
+    b = popValue(values);
+    a = popValue(values);
     result = a - b;
     valuesNumber = 1;
     break;
   case MULT:
+    b = popValue(values);
+    a = popValue(values);
     result = a * b;
     valuesNumber = 1;
     break;
   case DIV:
+    b = popValue(values);
+    a = popValue(values);
     result = a / b;
     valuesNumber = 1;
     break;
   case POW:
+    b = popValue(values);
+    a = popValue(values);
     result = pow(a, b);
     valuesNumber = 1;
     break;
   case SIN:
+    b = popValue(values);
+    // a = popValue(values);
     result = sin(b);
     valuesNumber = 0;
   }

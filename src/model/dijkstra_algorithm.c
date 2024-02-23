@@ -11,6 +11,8 @@ long double dijkstraAlgorithm(char *inputString) {
   init(&values);
   char *ptrInputString = inputString;
   while (*ptrInputString != '\0') {
+    printf("==========================================\n");
+    printf("%s\n", ptrInputString);
     if (isdigit(*ptrInputString)) {
       ptrInputString = parceValue(ptrInputString, &values, &isValueInBrackets,
                                   &numberCounter);
@@ -21,21 +23,26 @@ long double dijkstraAlgorithm(char *inputString) {
       ptrInputString = parceOperator(ptrInputString, &operators, &values,
                                      &isValueInBrackets, &numberCounter);
       printf("==========================================\n");
+      printf("%s\n", ptrInputString);
+      printf("==========================================\n");
       printStack(&operators, OPERATOR);
       printStack(&values, VALUE);
       ptrInputString = parceFunction(ptrInputString, &operators);
       printf("==========================================\n");
+      printf("%s\n", ptrInputString);
+      printf("==========================================\n");
       printStack(&operators, OPERATOR);
       printStack(&values, VALUE);
     }
-    printf("==========================================\n");
-    printStack(&operators, OPERATOR);
-    printStack(&values, VALUE);
   }
   while (operators.stackSize != 0) {
+    //==
     long double calcResult =
         valuesCalculation(&values, &operators, &numberCounter);
     push(0, 0, calcResult, isValueInBrackets, &values);
+    printf("==========================================\n");
+    printStack(&operators, OPERATOR);
+    printStack(&values, VALUE);
   }
   result = popValue(&values);
   destroy(&operators);
@@ -58,11 +65,23 @@ char *parceOperator(char *ptrInputString, Stack *operators, Stack *values,
            operators->stackSize != 0) {
       push(CHUSHPAN, 0, valuesCalculation(values, operators, numberCounter),
            *isValueInBrackets, values);
+      printf("==========================================\n");
+      printStack(operators, OPERATOR);
+      printStack(values, VALUE);
     }
     popOperator(operators);
+
+    // if (operators->stackSize > 0) {
+    //   if (peak(operators).operation >= COS &&
+    //       peak(operators).operation <= LOG) {
+    //     push(CHUSHPAN, 0, valuesCalculation(values, operators,
+    //     numberCounter),
+    //          *isValueInBrackets, values);
+    //   }
+    // }
+
     if (*numberCounter == 0)
       *isValueInBrackets = FALSE;
-    // numberOfBrackets--;
     ptrInputString++;
     break;
   case '+':
@@ -83,6 +102,9 @@ char *parceOperator(char *ptrInputString, Stack *operators, Stack *values,
     break;
   case '^':
     calculationLogic(operators, values, POW, STARSHAK, numberCounter);
+    ptrInputString++;
+    break;
+  case ' ':
     ptrInputString++;
     break;
   }
