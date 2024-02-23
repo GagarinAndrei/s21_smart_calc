@@ -1,13 +1,14 @@
 #ifndef TESTS_H
 #define TESTS_H
-#define ACCURACY 1e-06
+#define ACCURACY 1e-07
 #include <check.h>
+#include <stdio.h>
 
-// #include "../headers/smart_calc.h"
 #include "../headers/dijkstra_algorithm.h"
 #include "../headers/token_stack.h"
 #include "../headers/rpn_calculation.h"
 
-Suite *testDijkstraAlgorithm(void);
+Suite *testArithmetics(void);
+Suite *testFunctions(void);
 
 #endif

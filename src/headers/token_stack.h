@@ -1,8 +1,8 @@
 #ifndef TOKEN_STACK_H
 #define TOKEN_STACK_H
-#include <stdio.h>
-#include <stdlib.h>
+// #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 // #include "dijkstra_algorithm.h"
 
 #define OPERATOR 0
@@ -31,13 +31,7 @@ typedef enum {
   UNAR_PLUS = 18
 } operationType;
 
-typedef enum {
-  CHUSHPAN,
-  SKORLUPA,
-  SUPERA,
-  STARSHAK,
-  AVTOR
-} operationPriority;
+typedef enum { CHUSHPAN, SKORLUPA, SUPERA, STARSHAK, AVTOR } operationPriority;
 
 typedef struct Node {
   int priority;
@@ -65,9 +59,10 @@ void init(Stack *stackList);
  * @param long double value
  * @param Stack *stack
  */
-void push(int priority, int operation, long double value, int isInBrackets, Stack *stack);
+void push(int priority, int operation, long double value, int isInBrackets,
+          Stack *stack);
 long double popValue(Stack *stack);
-char popOperator(Stack *stack);
+int popOperator(Stack *stack);
 Token peak(const Stack *stack);
 void destroy(Stack *stack);
 

@@ -1,11 +1,14 @@
 #include "../headers/token_stack.h"
 
+#include <stdio.h>
+
 void init(Stack *stack) {
   stack->stackSize = 0;
   stack->top = NULL;
 }
 
-void push(int priority, int operation, long double value, int isValueInBrackets, Stack *stack) {
+void push(int priority, int operation, long double value, int isValueInBrackets,
+          Stack *stack) {
   Token *newNode = (Token *)malloc(sizeof(Token));
   if (newNode) {
     newNode->priority = priority;
@@ -32,7 +35,7 @@ long double popValue(Stack *stack) {
   return value;
 }
 
-char popOperator(Stack *stack) {
+int popOperator(Stack *stack) {
   char operation;
   Token *nextNode = NULL;
   if (stack->top == NULL) {
@@ -46,8 +49,7 @@ char popOperator(Stack *stack) {
   return operation;
 }
 
-Token peak(const Stack *stack) {
-  return *stack->top; }
+Token peak(const Stack *stack) { return *stack->top; }
 
 void destroy(Stack *stack) {
   Token *ptr_top = stack->top;

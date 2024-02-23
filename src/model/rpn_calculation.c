@@ -1,6 +1,8 @@
 #include "../headers/rpn_calculation.h"
-#include "../headers/dijkstra_algorithm.h"
+
 #include <math.h>
+
+#include "../headers/dijkstra_algorithm.h"
 
 void calculationLogic(Stack *operators, Stack *values, int currentOperator,
                       int currentPriority, int *numberCounter) {
@@ -17,56 +19,72 @@ void calculationLogic(Stack *operators, Stack *values, int currentOperator,
 
 long double valuesCalculation(Stack *values, Stack *operators,
                               int *numberCounter) {
-  long double result, a = 0, b = 0;
+  long double result;
   int isInBrackets = peak(values).isValueInBrackets;
-  int valuesNumber;
-  // b = popValue(values);
-  // if (values->stackSize > 0) {
-  //   if ((peak(values).isValueInBrackets && *numberCounter > 1) ||
-  //       !peak(values).isValueInBrackets) {
-  //     a = popValue(values);
-  //   }
-  // }
-
-  switch (popOperator(operators)) {
-  case PLUS:
-    b = popValue(values);
-    a = popValue(values);
-    result = a + b;
-    valuesNumber = 1;
-    break;
-  case MINUS:
-    b = popValue(values);
-    a = popValue(values);
-    result = a - b;
-    valuesNumber = 1;
-    break;
-  case MULT:
-    b = popValue(values);
-    a = popValue(values);
-    result = a * b;
-    valuesNumber = 1;
-    break;
-  case DIV:
-    b = popValue(values);
-    a = popValue(values);
-    result = a / b;
-    valuesNumber = 1;
-    break;
-  case POW:
-    b = popValue(values);
-    a = popValue(values);
-    result = pow(a, b);
-    valuesNumber = 1;
-    break;
-  case SIN:
-    b = popValue(values);
-    // a = popValue(values);
-    result = sin(b);
-    valuesNumber = 0;
-  }
-
-  if (isInBrackets)
-    *numberCounter -= valuesNumber;
+  int operation = popOperator(operators);
+  int valuesNumber = (operation < 8)
+                         ? operationWithTwoValues(values, operation, &result)
+                         : operationWithOneValue(values, operation, &result);
+  if (isInBrackets) *numberCounter -= valuesNumber;
   return result;
+}
+
+int operationWithTwoValues(Stack *values, int operation, long double *result) {
+  long double a = 0, b = 0;
+  b = popValue(values);
+  a = popValue(values);
+
+  switch (operation) {
+    case PLUS:
+      *result = a + b;
+      break;
+    case MINUS:
+      *result = a - b;
+      break;
+    case MULT:
+      *result = a * b;
+      break;
+    case DIV:
+      *result = a / b;
+      break;
+    case POW:
+      *result = pow(a, b);
+      break;
+  }
+  return 1;
+}
+
+int operationWithOneValue(Stack *values, int operation, long double *result) {
+  long double a = popValue(values);
+
+  switch (operation) {
+    case SIN:
+      *result = sin(a);
+      break;
+    case COS:
+      *result = cos(a);
+      break;
+    case TAN:
+      *result = tan(a);
+      break;
+    case ASIN:
+      *result = asin(a);
+      break;
+    case ACOS:
+      *result = acos(a);
+      break;
+    case ATAN:
+      *result = atan(a);
+      break;
+    case SQRT:
+      *result = sqrt(a);
+      break;
+    case LN:
+      *result = log(a);
+      break;
+    case LOG:
+      *result = log10(a);
+      break;
+  }
+  return 0;
 }
