@@ -1,12 +1,13 @@
 #include "../headers/dijkstra_algorithm.h"
 
 #include <stdbool.h>
-// #include <stdio.h>
+#include <stdio.h>
 
 long double dijkstraAlgorithm(char *inputString) {
   long double result;
   int numberCounter = 0;
   int isValueInBrackets = FALSE;
+  int isPrevOperator = FALSE;
   Stack operators, values;
   init(&operators);
   init(&values);
@@ -17,12 +18,14 @@ long double dijkstraAlgorithm(char *inputString) {
     if (isdigit(*ptrInputString)) {
       ptrInputString = parceValue(ptrInputString, &values, &isValueInBrackets,
                                   &numberCounter);
+      isPrevOperator = FALSE;
       // printf("==========================================\n");
       // printStack(&operators, OPERATOR);
       // printStack(&values, VALUE);
     } else {
-      ptrInputString = parceOperator(ptrInputString, &operators, &values,
-                                     &isValueInBrackets, &numberCounter);
+      ptrInputString =
+          parceOperator(ptrInputString, &operators, &values, &isValueInBrackets,
+                        &numberCounter, &isPrevOperator);
       // printf("==========================================\n");
       // printf("%s\n", ptrInputString);
       // printf("==========================================\n");
@@ -34,13 +37,15 @@ long double dijkstraAlgorithm(char *inputString) {
       // printf("==========================================\n");
       // printStack(&operators, OPERATOR);
       // printStack(&values, VALUE);
+      isPrevOperator = TRUE;
     }
   }
   while (operators.stackSize != 0) {
-    //==
     long double calcResult =
         valuesCalculation(&values, &operators, &numberCounter);
     push(0, 0, calcResult, isValueInBrackets, &values);
+    // calculationLogic(&operators, &values, peak(&operators).operation,
+    //                  peak(&operators).priority, &numberCounter);
     // printf("==========================================\n");
     // printStack(&operators, OPERATOR);
     // printStack(&values, VALUE);
@@ -52,61 +57,59 @@ long double dijkstraAlgorithm(char *inputString) {
 }
 
 char *parceOperator(char *ptrInputString, Stack *operators, Stack *values,
-                    int *isValueInBrackets, int *numberCounter) {
+                    int *isValueInBrackets, int *numberCounter,
+                    int *isPrevOperator) {
+  int currentPriority = SKORLUPA;
   switch (*ptrInputString) {
-    case 'x':
-    case '(':
-      // numberOfBrackets++;
-      *isValueInBrackets = true;
-      push(CHUSHPAN, OPEN_PARENTHESIS, 0, *isValueInBrackets, operators);
-      ptrInputString++;
-      break;
-    case ')':
-      while (peak(operators).operation != OPEN_PARENTHESIS &&
-             operators->stackSize != 0) {
-        push(CHUSHPAN, 0, valuesCalculation(values, operators, numberCounter),
-             *isValueInBrackets, values);
-        // printf("==========================================\n");
-        // printStack(operators, OPERATOR);
-        // printStack(values, VALUE);
-      }
-      popOperator(operators);
-
-      // if (operators->stackSize > 0) {
-      //   if (peak(operators).operation >= COS &&
-      //       peak(operators).operation <= LOG) {
-      //     push(CHUSHPAN, 0, valuesCalculation(values, operators,
-      //     numberCounter),
-      //          *isValueInBrackets, values);
-      //   }
-      // }
-
-      if (*numberCounter == 0) *isValueInBrackets = FALSE;
-      ptrInputString++;
-      break;
-    case '+':
-      calculationLogic(operators, values, PLUS, SKORLUPA, numberCounter);
-      ptrInputString++;
-      break;
-    case '-':
-      calculationLogic(operators, values, MINUS, SKORLUPA, numberCounter);
-      ptrInputString++;
-      break;
-    case '*':
-      calculationLogic(operators, values, MULT, SUPERA, numberCounter);
-      ptrInputString++;
-      break;
-    case '/':
-      calculationLogic(operators, values, DIV, SUPERA, numberCounter);
-      ptrInputString++;
-      break;
-    case '^':
-      calculationLogic(operators, values, POW, STARSHAK, numberCounter);
-      ptrInputString++;
-      break;
-    case ' ':
-      ptrInputString++;
-      break;
+  case 'x':
+  case '(':
+    *isValueInBrackets = true;
+    push(CHUSHPAN, OPEN_PARENTHESIS, 0, *isValueInBrackets, operators);
+    ptrInputString++;
+    break;
+  case ')':
+    while (peak(operators).operation != OPEN_PARENTHESIS &&
+           operators->stackSize != 0) {
+      push(CHUSHPAN, 0, valuesCalculation(values, operators, numberCounter),
+           *isValueInBrackets, values);
+      // printf("==========================================\n");
+      // printStack(operators, OPERATOR);
+      // printStack(values, VALUE);
+    }
+    popOperator(operators);
+    if (*numberCounter == 0)
+      *isValueInBrackets = FALSE;
+    ptrInputString++;
+    break;
+  case '+':
+    calculationLogic(operators, values, PLUS, SKORLUPA, numberCounter);
+    ptrInputString++;
+    break;
+  case '-':
+    if ((operators->stackSize == 0 && values->stackSize == 0) ||
+        *isPrevOperator) {
+      currentPriority = AVTOR;
+      push(CHUSHPAN, 0, 0, *isValueInBrackets, values);
+      // push(SKORLUPA, MINUS, 0, FALSE, operators);
+    }
+    calculationLogic(operators, values, MINUS, currentPriority, numberCounter);
+    ptrInputString++;
+    break;
+  case '*':
+    calculationLogic(operators, values, MULT, SUPERA, numberCounter);
+    ptrInputString++;
+    break;
+  case '/':
+    calculationLogic(operators, values, DIV, SUPERA, numberCounter);
+    ptrInputString++;
+    break;
+  case '^':
+    calculationLogic(operators, values, POW, STARSHAK, numberCounter);
+    ptrInputString++;
+    break;
+  case ' ':
+    ptrInputString++;
+    break;
   }
 
   return ptrInputString;
@@ -119,23 +122,28 @@ char *parceValue(char *ptrInputString, Stack *values, int *isValueInBrackets,
     ptrInputString++;
   } while (isdigit(*ptrInputString) || *ptrInputString == '.');
   push(0, 0, tmp_number, *isValueInBrackets, values);
-  if (peak(values).isValueInBrackets) *numberCounter += 1;
+  if (peak(values).isValueInBrackets)
+    *numberCounter += 1;
   return ptrInputString;
 }
 
 char *parceFunction(char *ptrInputString, Stack *operators) {
   int functionType = -1;
   int functionSize = functionTypeDeterminant(ptrInputString, &functionType);
-  if (functionType >= 0) push(SUPERA, functionType, 0, FALSE, operators);
+  if (functionType >= 0) {
+    push(SUPERA, functionType, 0, FALSE, operators);
+  }
   ptrInputString += functionSize;
+
   return ptrInputString;
 }
 
-int isCurrentHigherOrEqualPriority(const Stack *operators,
-                                   int currentPriority) {
+int isCurrentHigherPriority(const Stack *operators, int currentPriority) {
   int result = 0;
   if (operators->stackSize > 0) {
-    result = currentPriority >= peak(operators).priority;
+    result = (peak(operators).operation == POW)
+                 ? currentPriority >= peak(operators).priority
+                 : currentPriority > peak(operators).priority;
   }
   return result;
 }

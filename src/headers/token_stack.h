@@ -1,34 +1,32 @@
 #ifndef TOKEN_STACK_H
 #define TOKEN_STACK_H
-// #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-// #include "dijkstra_algorithm.h"
 
 #define OPERATOR 0
 #define VALUE 1
 
 typedef enum {
-  OPEN_PARENTHESIS = 0,
-  CLOSE_PARENTHESIS = 1,
-  PLUS = 2,
-  MINUS = 3,
-  MULT = 4,
-  DIV = 5,
-  POW = 6,
-  MOD = 7,
-  COS = 8,
-  SIN = 9,
-  TAN = 10,
-  ACOS = 11,
-  ASIN = 12,
-  ATAN = 13,
-  SQRT = 14,
-  LN = 15,
-  LOG = 16,
+  OPEN_PARENTHESIS,
+  CLOSE_PARENTHESIS,
+  PLUS,
+  MINUS,
+  MULT,
+  DIV,
+  POW,
+  MOD,
+  COS,
+  SIN,
+  TAN,
+  ACOS,
+  ASIN,
+  ATAN,
+  SQRT,
+  LN,
+  LOG,
   //==========
-  UNAR_MINUS = 17,
-  UNAR_PLUS = 18
+  UNAR_MINUS,
+  UNAR_PLUS
 } operationType;
 
 typedef enum { CHUSHPAN, SKORLUPA, SUPERA, STARSHAK, AVTOR } operationPriority;

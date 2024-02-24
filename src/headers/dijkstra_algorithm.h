@@ -13,10 +13,10 @@
 
 long double dijkstraAlgorithm(char *string);
 char *parceOperator(char *ptrInputString, Stack *operators, Stack *values,
-                    int *isValueInBrackets, int *numberOfBrackets);
+                    int *isValueInBrackets, int *numberOfBrackets, int *isPrevOperator);
 char *parceValue(char *ptrInputString, Stack *values, int *isValueInBrackets,
                  int *numberCounter);
 char *parceFunction(char *ptrInputString, Stack *operators);
-int isCurrentHigherOrEqualPriority(const Stack *operators, int priority);
+int isCurrentHigherPriority(const Stack *operators, int priority);
 
 #endif
