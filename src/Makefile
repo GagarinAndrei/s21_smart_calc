@@ -38,7 +38,7 @@ clangn:
 	clang-format -n -style=google $(SOURCES) headers/*.h tests/*.c tests/*.h
 
 clangi:
-	clang-format -i -style=google $(SOURCES) headers/*.h $(TESTS_SOURCES)
+	clang-format -i -style=google $(SOURCES) headers/*.h $(TESTS_SOURCES) 
 
 main: clean
 	$(GCC) $(CFALGS) $(SOURCES) $(CHECKFLAGS) -o s21_smart_calc

@@ -25,8 +25,7 @@ long double valuesCalculation(Stack *values, Stack *operators,
   int valuesNumber = (operation < COS)
                          ? operationWithTwoValues(values, operation, &result)
                          : operationWithOneValue(values, operation, &result);
-  if (isInBrackets)
-    *numberCounter -= valuesNumber;
+  if (isInBrackets) *numberCounter -= valuesNumber;
   return result;
 }
 
@@ -36,23 +35,23 @@ int operationWithTwoValues(Stack *values, int operation, long double *result) {
   a = popValue(values);
 
   switch (operation) {
-  case PLUS:
-    *result = a + b;
-    break;
-  case MINUS:
-    *result = a - b;
-    break;
-  case MULT:
-    *result = a * b;
-    break;
-  case DIV:
-    *result = a / b;
-    break;
-  case POW:
-    *result = pow(a, b);
-    break;
-  case MOD:
-    *result = fmod(a, b);
+    case PLUS:
+      *result = a + b;
+      break;
+    case MINUS:
+      *result = a - b;
+      break;
+    case MULT:
+      *result = a * b;
+      break;
+    case DIV:
+      *result = a / b;
+      break;
+    case POW:
+      *result = pow(a, b);
+      break;
+    case MOD:
+      *result = fmod(a, b);
   }
   return 1;
 }
@@ -61,36 +60,36 @@ int operationWithOneValue(Stack *values, int operation, long double *result) {
   long double a = popValue(values);
 
   switch (operation) {
-  case SIN:
-    *result = sin(a);
-    break;
-  case COS:
-    *result = cos(a);
-    break;
-  case TAN:
-    *result = tan(a);
-    break;
-  case ASIN:
-    *result = asin(a);
-    break;
-  case ACOS:
-    *result = acos(a);
-    break;
-  case ATAN:
-    *result = atan(a);
-    break;
-  case SQRT:
-    *result = sqrt(a);
-    break;
-  case LN:
-    *result = log(a);
-    break;
-  case LOG:
-    *result = log10(a);
-    break;
-  case UNAR_MINUS:
-    *result = -a;
-    break;
+    case SIN:
+      *result = sin(a);
+      break;
+    case COS:
+      *result = cos(a);
+      break;
+    case TAN:
+      *result = tan(a);
+      break;
+    case ASIN:
+      *result = asin(a);
+      break;
+    case ACOS:
+      *result = acos(a);
+      break;
+    case ATAN:
+      *result = atan(a);
+      break;
+    case SQRT:
+      *result = sqrt(a);
+      break;
+    case LN:
+      *result = log(a);
+      break;
+    case LOG:
+      *result = log10(a);
+      break;
+    case UNAR_MINUS:
+      *result = -a;
+      break;
   }
   return 0;
 }

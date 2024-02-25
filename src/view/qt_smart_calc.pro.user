@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 7.0.0, 2024-02-24T17:18:00. -->
+<!-- Written by QtCreator 7.0.0, 2024-02-25T16:42:54. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -241,7 +241,6 @@
      <value type="QString">DYLD_FRAMEWORK_PATH</value>
      <value type="QString">DYLD_LIBRARY_PATH</value>
     </valuelist>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">qt_smart_calc2</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/Users/dawnkali/Desktop/C7_SmartCalc_v1.0-1/src/view/qt_smart_calc.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/dawnkali/Desktop/C7_SmartCalc_v1.0-1/src/view/qt_smart_calc.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
