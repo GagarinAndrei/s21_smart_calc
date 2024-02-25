@@ -20,10 +20,10 @@ class MainWindow : public QMainWindow {
     void on_number_button_clicked();
     void on_dot_button_clicked();
     void on_pow_button_clicked();
-//    void on_unary_minus_button_clicked();
-//    void on_mod_button_clicked();
-//    void on_open_bracket_button_clicked();
-//    void on_close_bracket_button_clicked();
+    void on_unary_minus_button_clicked();
+    void on_mod_button_clicked();
+    void on_open_bracket_button_clicked();
+    void on_close_bracket_button_clicked();
 //    void on_mult_button_clicked();
 //    void on_div_button_clicked();
 //    void on_plus_button_clicked();

@@ -17,10 +17,10 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->pB_9, SIGNAL(clicked()), this, SLOT(on_number_button_clicked()));
   connect(ui->pB_dot, SIGNAL(clicked()), this, SLOT(on_dot_button_clicked()));
   connect(ui->pB_pow, SIGNAL(clicked()), this, SLOT(on_pow_button_clicked()));
-//  connect(ui->pB_dot, SIGNAL(clicked()), this, SLOT(on_unary_minus_button_clicked()));
-//  connect(ui->pB_dot, SIGNAL(clicked()), this, SLOT(on_mod_button_clicked()));
-//  connect(ui->pB_dot, SIGNAL(clicked()), this, SLOT(on_open_bracket_button_clicked()));
-//  connect(ui->pB_dot, SIGNAL(clicked()), this, SLOT(on_close_bracket_button_clicked()));
+  connect(ui->pB_unary_minus, SIGNAL(clicked()), this, SLOT(on_unary_minus_button_clicked()));
+  connect(ui->pB_mod, SIGNAL(clicked()), this, SLOT(on_mod_button_clicked()));
+  connect(ui->pB_open_bracket, SIGNAL(clicked()), this, SLOT(on_open_bracket_button_clicked()));
+  connect(ui->pB_close_bracket, SIGNAL(clicked()), this, SLOT(on_close_bracket_button_clicked()));
 //  connect(ui->pB_dot, SIGNAL(clicked()), this, SLOT(on_mult_button_clicked()));
 //  connect(ui->pB_dot, SIGNAL(clicked()), this, SLOT(on_div_button_clicked()));
 //  connect(ui->pB_dot, SIGNAL(clicked()), this, SLOT(on_plus_button_clicked()));
@@ -60,8 +60,21 @@ void MainWindow::on_dot_button_clicked() {
 }
 
 void MainWindow::on_pow_button_clicked() {
-//  if (!(ui->display->text().contains('.'))) {
     ui->display->setText(ui->display->text() + "^");
-//  }
 }
 
+void MainWindow::on_mod_button_clicked() {
+    ui->display->setText(ui->display->text() + "mod");
+}
+
+void MainWindow::on_unary_minus_button_clicked() {
+    ui->display->setText(ui->display->text() + "-");
+}
+
+void MainWindow::on_open_bracket_button_clicked() {
+    ui->display->setText(ui->display->text() + "(");
+}
+
+void MainWindow::on_close_bracket_button_clicked() {
+    ui->display->setText(ui->display->text() + ")");
+}
