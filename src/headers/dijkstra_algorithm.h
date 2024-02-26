@@ -1,5 +1,6 @@
 #ifndef STRING_PARCER_H
 #define STRING_PARCER_H
+#define MAX_SIZE 255
 #define TRUE 1
 #define FALSE 0
 #include <ctype.h>

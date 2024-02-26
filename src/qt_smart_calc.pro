@@ -24,7 +24,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 CONFIG += c++17
 
@@ -34,11 +34,21 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    ../model/dijkstra_algorithm.c \
+    ../model/token_stack.c \
+    ../model/function_type_determinant.c \
+    ../model/rpn_calculation.c \
+    qcustomplot.cpp
 
 HEADERS += \
-    mainwindow.h
-
+    mainwindow.h \
+    ../headers/dijkstra_algorithm.h \
+    ../headers/token_stack.h \
+    ../headers/function_type_determinant.h \
+    ../headers/rpn_calculation.h \
+    ../headers/smart_calc.h \
+    qcustomplot.h
 FORMS += \
     mainwindow.ui
 
@@ -51,3 +61,6 @@ CONFIG += embed_translations
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    Putin.jpg

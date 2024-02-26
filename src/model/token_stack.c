@@ -62,14 +62,14 @@ void destroy(Stack *stack) {
   stack->top = NULL;
 }
 
-void printStack(const Stack *stack, int stackType) {
-  Token *ptr = stack->top;
-  while (ptr != NULL) {
-    if (stackType == OPERATOR)
-      printf("%d ", ptr->operation);
-    else
-      printf("%Lf ", ptr->value);
-    ptr = ptr->next;
-  }
-  printf("\n");
-}
+// void printStack(const Stack *stack, int stackType) {
+//   Token *ptr = stack->top;
+//   while (ptr != NULL) {
+//     if (stackType == OPERATOR)
+//       printf("%d ", ptr->operation);
+//     else
+//       printf("%Lf ", ptr->value);
+//     ptr = ptr->next;
+//   }
+//   printf("\n");
+// }
