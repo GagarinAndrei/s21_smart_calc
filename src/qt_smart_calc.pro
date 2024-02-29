@@ -39,7 +39,8 @@ SOURCES += \
     ../model/token_stack.c \
     ../model/function_type_determinant.c \
     ../model/rpn_calculation.c \
-    qcustomplot.cpp
+    qcustomplot.cpp \
+    view/plot.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -48,9 +49,11 @@ HEADERS += \
     ../headers/function_type_determinant.h \
     ../headers/rpn_calculation.h \
     ../headers/smart_calc.h \
-    qcustomplot.h
+    qcustomplot.h \
+    view/plot.h
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    view/plot.ui
 
 #TRANSLATIONS += \
 #    s21_SmartCalc_ru_RU.ts

@@ -2,7 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QKeyEvent>
+#include "view/plot.h"
+#include <QVector>
 extern "C" {
   #include "./headers/dijkstra_algorithm.h"
 }
@@ -44,12 +45,10 @@ private slots:
   void on_log_button_clicked();
   void on_x_button_clicked();
   void on_result_button_clicked();
-
-protected:
-    void keyPressEvent(QKeyEvent* pe) override;
-
+  void on_rb_plot_toggled(bool checked);
 private:
   Ui::MainWindow *ui;
+  Plot plot;
 };
 
 #endif // MAINWINDOW_H

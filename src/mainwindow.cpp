@@ -44,8 +44,6 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->pB_result, SIGNAL(clicked()), this,
           SLOT(on_result_button_clicked()));
 
-//  QPixmap pix("Putin.jpg");
-//      ui->label->setPixmap(pix);
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -199,7 +197,7 @@ void MainWindow::on_x_button_clicked() {
   if (ui->display->text() == "0") {
     ui->display->clear();
   }
-  ui->display->setText(ui->display->text() + "x");
+  ui->display->setText(ui->display->text() + "X");
 }
 
 void MainWindow::on_clear_button_clicked() {
@@ -215,12 +213,15 @@ void MainWindow::on_result_button_clicked() {
   ui->display->setText(QString::number(result));
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *pressEvent) {
-  int key = pressEvent->key();
-  if (key >= Qt::Key_0 && key <= Qt::Key_9) {
-    QString keyString = QString::number(key - Qt::Key_0);
-    ui->display->setText(ui->display->text() + keyString);
-  } else {
-    QWidget::keyPressEvent(pressEvent);
-  }
+
+void MainWindow::on_rb_plot_toggled(bool checked)
+{
+    if (checked == true) {
+    plot.move(250, 400);
+    plot.show();
+    } else {
+        plot.close();
+    }
 }
+
+

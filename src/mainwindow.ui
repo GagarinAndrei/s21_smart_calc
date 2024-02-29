@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
-    <height>720</height>
+    <width>748</width>
+    <height>365</height>
    </rect>
   </property>
   <property name="font">
@@ -2028,7 +2028,7 @@ color: yellow</string>
      </font>
     </property>
     <property name="text">
-     <string>x</string>
+     <string>X</string>
     </property>
     <property name="iconSize">
      <size>
@@ -2046,79 +2046,91 @@ color: yellow</string>
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>10</y>
+      <width>171</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout" columnstretch="0">
+     <property name="leftMargin">
+      <number>16</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="2" column="0">
+      <widget class="QRadioButton" name="rB_deposit">
+       <property name="text">
+        <string>Deposit</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QRadioButton" name="rb_plot">
+       <property name="text">
+        <string>Graph</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QRadioButton" name="rB_math">
+       <property name="text">
+        <string>Math</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QRadioButton" name="rB_credit">
+       <property name="text">
+        <string>Credit</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QDoubleSpinBox" name="dSB_xValue">
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>65</y>
+      <y>60</y>
       <width>471</width>
-      <height>41</height>
+      <height>50</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>20</pointsize>
+      <pointsize>32</pointsize>
      </font>
     </property>
-    <property name="layoutDirection">
-     <enum>Qt::LeftToRight</enum>
+    <property name="contextMenuPolicy">
+     <enum>Qt::DefaultContextMenu</enum>
     </property>
-    <property name="verticalScrollBarPolicy">
-     <enum>Qt::ScrollBarAlwaysOff</enum>
-    </property>
-    <property name="horizontalScrollBarPolicy">
-     <enum>Qt::ScrollBarAlwaysOff</enum>
-    </property>
-    <property name="lineWrapMode">
-     <enum>QTextEdit::NoWrap</enum>
-    </property>
-    <property name="placeholderText">
-     <string>Enter X value</string>
-    </property>
-   </widget>
-   <widget class="QCustomPlot" name="plot" native="true">
-    <property name="geometry">
-     <rect>
-      <x>586</x>
-      <y>19</y>
-      <width>671</width>
-      <height>681</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>380</y>
-      <width>541</width>
-      <height>321</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>Putin.jpg</pixmap>
-    </property>
-    <property name="scaledContents">
+    <property name="frame">
      <bool>false</bool>
+    </property>
+    <property name="buttonSymbols">
+     <enum>QAbstractSpinBox::NoButtons</enum>
+    </property>
+    <property name="keyboardTracking">
+     <bool>true</bool>
+    </property>
+    <property name="decimals">
+     <number>7</number>
+    </property>
+    <property name="minimum">
+     <double>-1000000.000000000000000</double>
     </property>
    </widget>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QCustomPlot</class>
-   <extends>QWidget</extends>
-   <header>qcustomplot.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
  <buttongroups>
