@@ -12,10 +12,10 @@
 #include "rpn_calculation.h"
 #include "token_stack.h"
 
-long double dijkstraAlgorithm(char *string);
+long double dijkstraAlgorithm(char *string, long double x);
 char *parceOperator(char *ptrInputString, Stack *operators, Stack *values,
                     int *isValueInBrackets, int *numberOfBrackets,
-                    int *isPrevOperator);
+                    int *isPrevOperator, long double x);
 char *parceValue(char *ptrInputString, Stack *values, int *isValueInBrackets,
                  int *numberCounter);
 char *parceFunction(char *ptrInputString, Stack *operators);

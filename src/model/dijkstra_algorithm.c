@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-long double dijkstraAlgorithm(char *inputString) {
+long double dijkstraAlgorithm(char *inputString, long double x) {
   long double result;
   int numberCounter = 0;
   int isValueInBrackets = FALSE;
@@ -25,7 +25,7 @@ long double dijkstraAlgorithm(char *inputString) {
     } else {
       ptrInputString =
           parceOperator(ptrInputString, &operators, &values, &isValueInBrackets,
-                        &numberCounter, &isPrevOperator);
+                        &numberCounter, &isPrevOperator, x);
       // printf("==========================================\n");
       // printf("%s\n", ptrInputString);
       // printf("==========================================\n");
@@ -58,10 +58,13 @@ long double dijkstraAlgorithm(char *inputString) {
 
 char *parceOperator(char *ptrInputString, Stack *operators, Stack *values,
                     int *isValueInBrackets, int *numberCounter,
-                    int *isPrevOperator) {
+                    int *isPrevOperator, long double x) {
   int currentPriority = SKORLUPA;
   switch (*ptrInputString) {
     case 'x':
+      push(0, 0, x, *isValueInBrackets, values);
+      ptrInputString++;
+      break;
     case '(':
       *isValueInBrackets = true;
       push(CHUSHPAN, OPEN_PARENTHESIS, 0, *isValueInBrackets, operators);

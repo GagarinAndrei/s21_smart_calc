@@ -7,7 +7,7 @@ START_TEST(sin_0) {
   char *string = "sin(5)";
   long double reference = sin(5);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -16,7 +16,7 @@ START_TEST(sin_1) {
   char *string = "10-sin(5-(2*3)*10)";
   long double reference = 10 - sin(5 - (2 * 3) * 10);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -25,7 +25,7 @@ START_TEST(sin_2) {
   char *string = "10-sin(10)";
   long double reference = 10 - sin(10);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -34,7 +34,7 @@ START_TEST(cos_0) {
   char *string = "10-cos(5-(2*3)*10)";
   long double reference = 10 - cos(5 - (2 * 3) * 10);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -43,7 +43,7 @@ START_TEST(cos_1) {
   char *string = "10-cos(10)";
   long double reference = 10 - cos(10);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -52,7 +52,7 @@ START_TEST(tan_0) {
   char *string = "10-tan(5-(2*3)*10)";
   long double reference = 10 - tan(5 - (2 * 3) * 10);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -61,7 +61,7 @@ START_TEST(tan_1) {
   char *string = "10-tan(10)";
   long double reference = 10 - tan(10);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -69,7 +69,7 @@ START_TEST(asin_0) {
   // printf("\033[44masin_0\033[0m\n");
   char *string = "10-asin(5-(2*3)*10)";
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_nan(result);
 }
 
@@ -78,7 +78,7 @@ START_TEST(asin_1) {
   char *string = "10-asin(0.5)";
   long double reference = 10 - asin(0.5);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -87,7 +87,7 @@ START_TEST(acos_0) {
   char *string = "10-acos(1-1/245*10)";
   long double reference = 10.0 - acos(1.0 - 1.0 / 245.0 * 10.0);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -97,7 +97,7 @@ START_TEST(acos_1) {
   char *string = "10-acos(0.34)";
   long double reference = 10 - acos(0.34);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -107,7 +107,7 @@ START_TEST(atan_0) {
   char *string = "10-atan(5-(2*3)*10)";
   long double reference = 10 - atan(5 - (2 * 3) * 10);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -117,7 +117,7 @@ START_TEST(atan_1) {
   char *string = "10-atan(10)";
   long double reference = 10 - atan(10);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -125,7 +125,7 @@ START_TEST(sqrt_0) {
   // printf("\033[44msqrt_0\033[0m\n");
   char *string = "10-sqrt(5-(2*3)*10)";
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_nan(result);
 }
 
@@ -134,7 +134,7 @@ START_TEST(sqrt_1) {
   char *string = "10-sqrt(10)";
   long double reference = 10 - sqrt(10);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -142,7 +142,7 @@ START_TEST(ln_0) {
   // printf("\033[44mlog_0\033[0m\n");
   char *string = "10-ln(5-(2*3)*10)";
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_nan(result);
 }
 
@@ -151,7 +151,7 @@ START_TEST(ln_1) {
   char *string = "10-ln(10)";
   long double reference = 10 - log(10);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
@@ -159,7 +159,7 @@ START_TEST(log_0) {
   // printf("\033[44mlog10_0\033[0m\n");
   char *string = "10-log(5-(2*3)*10)";
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_nan(result);
 }
 
@@ -168,7 +168,7 @@ START_TEST(log_1) {
   char *string = "10-log(10)";
   long double reference = 10 - log10(10);
   long double result;
-  result = dijkstraAlgorithm(string);
+  result = dijkstraAlgorithm(string, 0);
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
