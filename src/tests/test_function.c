@@ -172,6 +172,15 @@ START_TEST(log_1) {
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
+START_TEST(x_1) {
+  double x = 3;
+  char *string = "x^2+2*x+2";
+  long double reference = pow(x, 2) + 2 * x + 2;
+  long double result;
+  result = dijkstraAlgorithm(string, x);
+  ck_assert_double_eq_tol(reference, result, ACCURACY);
+}
+
 Suite *testFunctions(void) {
   Suite *suite = suite_create("\033[45m-=FUNCTIONS=-\033[0m");
   TCase *test_case = tcase_create("function_test_case");
@@ -195,6 +204,7 @@ Suite *testFunctions(void) {
   tcase_add_test(test_case, ln_1);
   tcase_add_test(test_case, log_0);
   tcase_add_test(test_case, log_1);
+  tcase_add_test(test_case, x_1);
 
   suite_add_tcase(suite, test_case);
   return suite;

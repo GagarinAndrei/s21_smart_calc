@@ -55,7 +55,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -80,7 +80,7 @@
      <bool>false</bool>
     </property>
     <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
+     <string notr="true">bG_numbers</string>
     </attribute>
    </widget>
    <widget class="QPushButton" name="pB_1">
@@ -116,7 +116,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -141,7 +141,7 @@
      <bool>false</bool>
     </property>
     <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
+     <string notr="true">bG_numbers</string>
     </attribute>
    </widget>
    <widget class="QPushButton" name="pB_2">
@@ -177,7 +177,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -202,7 +202,7 @@
      <bool>false</bool>
     </property>
     <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
+     <string notr="true">bG_numbers</string>
     </attribute>
    </widget>
    <widget class="QPushButton" name="pB_3">
@@ -238,7 +238,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -263,7 +263,7 @@
      <bool>false</bool>
     </property>
     <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
+     <string notr="true">bG_numbers</string>
     </attribute>
    </widget>
    <widget class="QPushButton" name="pB_4">
@@ -299,7 +299,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -324,7 +324,7 @@
      <bool>false</bool>
     </property>
     <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
+     <string notr="true">bG_numbers</string>
     </attribute>
    </widget>
    <widget class="QPushButton" name="pB_5">
@@ -360,7 +360,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -385,7 +385,7 @@
      <bool>false</bool>
     </property>
     <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
+     <string notr="true">bG_numbers</string>
     </attribute>
    </widget>
    <widget class="QPushButton" name="pB_6">
@@ -421,7 +421,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -446,7 +446,7 @@
      <bool>false</bool>
     </property>
     <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
+     <string notr="true">bG_numbers</string>
     </attribute>
    </widget>
    <widget class="QPushButton" name="pB_7">
@@ -482,7 +482,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -510,7 +510,7 @@
      <bool>false</bool>
     </property>
     <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
+     <string notr="true">bG_numbers</string>
     </attribute>
    </widget>
    <widget class="QPushButton" name="pB_8">
@@ -546,7 +546,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -571,7 +571,7 @@
      <bool>false</bool>
     </property>
     <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
+     <string notr="true">bG_numbers</string>
     </attribute>
    </widget>
    <widget class="QPushButton" name="pB_9">
@@ -607,7 +607,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -632,7 +632,7 @@
      <bool>false</bool>
     </property>
     <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
+     <string notr="true">bG_numbers</string>
     </attribute>
    </widget>
    <widget class="QPushButton" name="pB_dot">
@@ -668,7 +668,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -732,7 +732,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -796,7 +796,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -860,7 +860,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -924,7 +924,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -967,7 +967,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>36</pointsize>
+      <pointsize>24</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -975,6 +975,9 @@
     </property>
     <property name="frameShape">
      <enum>QFrame::Box</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
     </property>
     <property name="text">
      <string>0</string>
@@ -1016,7 +1019,7 @@
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1078,7 +1081,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1139,7 +1142,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1200,7 +1203,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1261,7 +1264,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1322,7 +1325,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>24</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1383,7 +1386,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>24</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1441,7 +1444,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>24</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1499,7 +1502,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>24</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1557,7 +1560,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>24</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1615,7 +1618,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>24</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1673,7 +1676,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>24</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1731,7 +1734,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>24</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1789,7 +1792,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>24</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1847,7 +1850,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>24</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1905,7 +1908,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>24</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -1963,7 +1966,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>24</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -2021,7 +2024,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>24</pointsize>
+      <pointsize>20</pointsize>
       <bold>false</bold>
       <strikeout>false</strikeout>
       <kerning>true</kerning>
@@ -2107,7 +2110,7 @@ color: yellow</string>
     <property name="font">
      <font>
       <family>Fira Code</family>
-      <pointsize>32</pointsize>
+      <pointsize>20</pointsize>
      </font>
     </property>
     <property name="contextMenuPolicy">
@@ -2128,12 +2131,16 @@ color: yellow</string>
     <property name="minimum">
      <double>-1000000.000000000000000</double>
     </property>
+    <property name="maximum">
+     <double>1000000000000.000000000000000</double>
+    </property>
    </widget>
   </widget>
  </widget>
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="bG_numbers"/>
   <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

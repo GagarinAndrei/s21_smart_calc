@@ -40,6 +40,8 @@ SOURCES += \
     ../model/function_type_determinant.c \
     ../model/rpn_calculation.c \
     qcustomplot.cpp \
+    view/credit.cpp \
+    view/deposite.cpp \
     view/plot.cpp
 
 HEADERS += \
@@ -50,13 +52,15 @@ HEADERS += \
     ../headers/rpn_calculation.h \
     ../headers/smart_calc.h \
     qcustomplot.h \
+    view/credit.h \
+    view/deposite.h \
     view/plot.h
 FORMS += \
     mainwindow.ui \
+    view/credit.ui \
+    view/deposite.ui \
     view/plot.ui
 
-#TRANSLATIONS += \
-#    s21_SmartCalc_ru_RU.ts
 CONFIG += lrelease
 CONFIG += embed_translations
 
@@ -65,5 +69,3 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    Putin.jpg

@@ -19,7 +19,7 @@ void calculationLogic(Stack *operators, Stack *values, int currentOperator,
 
 long double valuesCalculation(Stack *values, Stack *operators,
                               int *numberCounter) {
-  long double result;
+  long double result = NAN;
   int isInBrackets = peak(values).isValueInBrackets;
   int operation = popOperator(operators);
   int valuesNumber = (operation < COS)

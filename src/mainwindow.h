@@ -2,8 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "view/credit.h"
+#include "view/deposite.h"
 #include "view/plot.h"
 #include <QVector>
+
 extern "C" {
   #include "./headers/dijkstra_algorithm.h"
 }
@@ -46,9 +49,24 @@ private slots:
   void on_x_button_clicked();
   void on_result_button_clicked();
   void on_rb_plot_toggled(bool checked);
-private:
+
+  void operator_button_availability(bool is_enabled, char operation);
+  void number_button_availability(bool is_enabled);
+  void arifmetics_availability(bool is_enabled);
+  void trigonometrics_availability(bool is_enabled);
+
+  void after_open_bracket_buttons(bool is_enabled);
+
+  // void number_button_clicked();
+  void on_rB_credit_toggled(bool checked);
+
+  void on_rB_deposit_toggled(bool checked);
+
+  private:
   Ui::MainWindow *ui;
   Plot plot;
+  Credit credit;
+  Deposite deposite;
 };
 
 #endif // MAINWINDOW_H

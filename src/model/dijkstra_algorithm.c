@@ -1,9 +1,8 @@
 #include "../headers/dijkstra_algorithm.h"
 
 #include <stdbool.h>
-#include <stdio.h>
 
-long double dijkstraAlgorithm(char *inputString, long double x) {
+long double dijkstraAlgorithm(char *inputString, double x) {
   long double result;
   int numberCounter = 0;
   int isValueInBrackets = FALSE;
@@ -13,30 +12,15 @@ long double dijkstraAlgorithm(char *inputString, long double x) {
   init(&values);
   char *ptrInputString = inputString;
   while (*ptrInputString != '\0') {
-    // printf("==========================================\n");
-    // printf("%s\n", ptrInputString);
     if (isdigit(*ptrInputString)) {
       ptrInputString = parceValue(ptrInputString, &values, &isValueInBrackets,
                                   &numberCounter);
       isPrevOperator = FALSE;
-      // printf("==========================================\n");
-      // printStack(&operators, OPERATOR);
-      // printStack(&values, VALUE);
     } else {
       ptrInputString =
           parceOperator(ptrInputString, &operators, &values, &isValueInBrackets,
                         &numberCounter, &isPrevOperator, x);
-      // printf("==========================================\n");
-      // printf("%s\n", ptrInputString);
-      // printf("==========================================\n");
-      // printStack(&operators, OPERATOR);
-      // printStack(&values, VALUE);
       ptrInputString = parceFunction(ptrInputString, &operators);
-      // printf("==========================================\n");
-      // printf("%s\n", ptrInputString);
-      // printf("==========================================\n");
-      // printStack(&operators, OPERATOR);
-      // printStack(&values, VALUE);
       isPrevOperator = TRUE;
     }
   }
@@ -44,11 +28,6 @@ long double dijkstraAlgorithm(char *inputString, long double x) {
     long double calcResult =
         valuesCalculation(&values, &operators, &numberCounter);
     push(0, 0, calcResult, isValueInBrackets, &values);
-    // calculationLogic(&operators, &values, peak(&operators).operation,
-    //                  peak(&operators).priority, &numberCounter);
-    // printf("==========================================\n");
-    // printStack(&operators, OPERATOR);
-    // printStack(&values, VALUE);
   }
   result = popValue(&values);
   destroy(&operators);
@@ -62,7 +41,7 @@ char *parceOperator(char *ptrInputString, Stack *operators, Stack *values,
   int currentPriority = SKORLUPA;
   switch (*ptrInputString) {
     case 'x':
-      push(0, 0, x, *isValueInBrackets, values);
+      push(CHUSHPAN, 0, x, *isValueInBrackets, values);
       ptrInputString++;
       break;
     case '(':
@@ -75,9 +54,6 @@ char *parceOperator(char *ptrInputString, Stack *operators, Stack *values,
              operators->stackSize != 0) {
         push(CHUSHPAN, 0, valuesCalculation(values, operators, numberCounter),
              *isValueInBrackets, values);
-        // printf("==========================================\n");
-        // printStack(operators, OPERATOR);
-        // printStack(values, VALUE);
       }
       popOperator(operators);
       if (*numberCounter == 0) *isValueInBrackets = FALSE;
@@ -92,7 +68,6 @@ char *parceOperator(char *ptrInputString, Stack *operators, Stack *values,
           *isPrevOperator) {
         currentPriority = AVTOR;
         push(CHUSHPAN, 0, 0, *isValueInBrackets, values);
-        // push(SKORLUPA, MINUS, 0, FALSE, operators);
       }
       calculationLogic(operators, values, MINUS, currentPriority,
                        numberCounter);
@@ -124,7 +99,7 @@ char *parceValue(char *ptrInputString, Stack *values, int *isValueInBrackets,
   do {
     ptrInputString++;
   } while (isdigit(*ptrInputString) || *ptrInputString == '.');
-  push(0, 0, tmp_number, *isValueInBrackets, values);
+  push(CHUSHPAN, 0, tmp_number, *isValueInBrackets, values);
   if (peak(values).isValueInBrackets) *numberCounter += 1;
   return ptrInputString;
 }
