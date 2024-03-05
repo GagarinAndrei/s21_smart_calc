@@ -23,7 +23,7 @@ class Ui_Plot
 {
 public:
     QCustomPlot *widget;
-    QWidget *widget1;
+    QWidget *layoutWidget;
     QGridLayout *gridLayout;
     QLabel *l_min_X;
     QLabel *l_min_Y;
@@ -42,13 +42,13 @@ public:
         widget = new QCustomPlot(Plot);
         widget->setObjectName(QString::fromUtf8("widget"));
         widget->setGeometry(QRect(0, 0, 640, 480));
-        widget1 = new QWidget(Plot);
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        widget1->setGeometry(QRect(10, 490, 621, 206));
-        gridLayout = new QGridLayout(widget1);
+        layoutWidget = new QWidget(Plot);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 490, 621, 206));
+        gridLayout = new QGridLayout(layoutWidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
-        l_min_X = new QLabel(widget1);
+        l_min_X = new QLabel(layoutWidget);
         l_min_X->setObjectName(QString::fromUtf8("l_min_X"));
         QFont font;
         font.setFamily(QString::fromUtf8("Fira Code"));
@@ -58,60 +58,64 @@ public:
 
         gridLayout->addWidget(l_min_X, 0, 0, 1, 1);
 
-        l_min_Y = new QLabel(widget1);
+        l_min_Y = new QLabel(layoutWidget);
         l_min_Y->setObjectName(QString::fromUtf8("l_min_Y"));
         l_min_Y->setFont(font);
         l_min_Y->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout->addWidget(l_min_Y, 0, 1, 1, 1);
 
-        sB_min_X = new QSpinBox(widget1);
+        sB_min_X = new QSpinBox(layoutWidget);
         sB_min_X->setObjectName(QString::fromUtf8("sB_min_X"));
         sB_min_X->setFont(font);
         sB_min_X->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         sB_min_X->setMinimum(-1000000);
         sB_min_X->setMaximum(1000000);
+        sB_min_X->setValue(-4);
 
         gridLayout->addWidget(sB_min_X, 1, 0, 1, 1);
 
-        sB_min_Y = new QSpinBox(widget1);
+        sB_min_Y = new QSpinBox(layoutWidget);
         sB_min_Y->setObjectName(QString::fromUtf8("sB_min_Y"));
         sB_min_Y->setFont(font);
         sB_min_Y->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         sB_min_Y->setMinimum(-1000000);
         sB_min_Y->setMaximum(1000000);
+        sB_min_Y->setValue(-4);
 
         gridLayout->addWidget(sB_min_Y, 1, 1, 1, 1);
 
-        l_max_X = new QLabel(widget1);
+        l_max_X = new QLabel(layoutWidget);
         l_max_X->setObjectName(QString::fromUtf8("l_max_X"));
         l_max_X->setFont(font);
         l_max_X->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout->addWidget(l_max_X, 2, 0, 1, 1);
 
-        l_max_Y = new QLabel(widget1);
+        l_max_Y = new QLabel(layoutWidget);
         l_max_Y->setObjectName(QString::fromUtf8("l_max_Y"));
         l_max_Y->setFont(font);
         l_max_Y->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout->addWidget(l_max_Y, 2, 1, 1, 1);
 
-        sB_max_X = new QSpinBox(widget1);
+        sB_max_X = new QSpinBox(layoutWidget);
         sB_max_X->setObjectName(QString::fromUtf8("sB_max_X"));
         sB_max_X->setFont(font);
         sB_max_X->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         sB_max_X->setMinimum(-1000000);
         sB_max_X->setMaximum(1000000);
+        sB_max_X->setValue(4);
 
         gridLayout->addWidget(sB_max_X, 3, 0, 1, 1);
 
-        sB_max_Y = new QSpinBox(widget1);
+        sB_max_Y = new QSpinBox(layoutWidget);
         sB_max_Y->setObjectName(QString::fromUtf8("sB_max_Y"));
         sB_max_Y->setFont(font);
         sB_max_Y->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         sB_max_Y->setMinimum(-1000000);
         sB_max_Y->setMaximum(1000000);
+        sB_max_Y->setValue(4);
 
         gridLayout->addWidget(sB_max_Y, 3, 1, 1, 1);
 

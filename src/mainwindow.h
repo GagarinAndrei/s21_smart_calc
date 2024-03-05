@@ -1,5 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#define START -1000000
+#define END 1000000
 
 #include <QMainWindow>
 #include "view/credit.h"
@@ -57,16 +59,21 @@ private slots:
 
   void after_open_bracket_buttons(bool is_enabled);
 
-  // void number_button_clicked();
   void on_rB_credit_toggled(bool checked);
 
   void on_rB_deposit_toggled(bool checked);
 
   private:
   Ui::MainWindow *ui;
-  Plot plot;
+  Plot *plot;
   Credit credit;
   Deposite deposite;
+
+
+  signals:
+  void sendStringToPlot(const char *);
 };
+
+
 
 #endif // MAINWINDOW_H

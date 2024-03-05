@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -44,6 +43,8 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->pB_result, SIGNAL(clicked()), this,
           SLOT(on_result_button_clicked()));
 
+  plot = new Plot;
+  connect(this, &MainWindow::sendStringToPlot, plot, &Plot::plotSlot);
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -276,6 +277,7 @@ void MainWindow::on_x_button_clicked() {
   number_button_availability(false);
   trigonometrics_availability(false);
   arifmetics_availability(true);
+  ui->pB_close_bracket->setEnabled(true);
 }
 
 void MainWindow::on_clear_button_clicked() {
@@ -291,9 +293,9 @@ void MainWindow::on_result_button_clicked() {
   QString string = ui->display->text();
   QByteArray ba = string.toLocal8Bit();
   char *inputString = ba.data();
-  double x = ui->dSB_xValue->value();
+  double xValue = ui->dSB_xValue->value();
   double result;
-  result = dijkstraAlgorithm(inputString, x);
+  result = dijkstraAlgorithm(inputString, xValue);
   string = QString::number(result);
   ui->display->setText(string);
   number_button_availability(true);
@@ -306,10 +308,13 @@ void MainWindow::on_result_button_clicked() {
 void MainWindow::on_rb_plot_toggled(bool checked)
 {
     if (checked == true) {
-    plot.move(0, 400);
-    plot.show();
+        QString string = ui->display->text();
+        QByteArray ba = string.toLocal8Bit();
+        char *inputString = ba.data();
+        emit sendStringToPlot(inputString);
+        plot->show();
     } else {
-        plot.close();
+        plot->close();
     }
 }
 
