@@ -2073,7 +2073,7 @@ color: yellow</string>
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QRadioButton" name="rb_plot">
+      <widget class="QRadioButton" name="rB_plot">
        <property name="text">
         <string>Graph</string>
        </property>

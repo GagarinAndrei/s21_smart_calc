@@ -3,38 +3,26 @@
 
 #include <QWidget>
 
+extern "C" {
+#include "./headers/dijkstra_algorithm.h"
+}
+
 namespace Ui {
 class Plot;
 }
 
-class Plot : public QWidget
-{
-    Q_OBJECT
+class Plot : public QWidget {
+  Q_OBJECT
 
-public:
-    explicit Plot(QWidget *parent = nullptr);
-    ~Plot();
+ public:
+  explicit Plot(QWidget *parent = nullptr);
+  ~Plot();
 
-private slots:
+ private:
+  Ui::Plot *ui;
 
-    void on_sB_min_X_textChanged(const QString &arg1);
-
-    void on_sB_max_X_textChanged(const QString &arg1);
-
-    void on_sB_min_Y_textChanged(const QString &arg1);
-
-    void on_sB_max_Y_textChanged(const QString &arg1);
-
-private:
-    Ui::Plot *ui;
-    double xStart, xEnd, step, tempX;
-    int pointCounts;
-    char *inputString;
-    QVector<double> xVector,yVector;
-    void printGraph();
-
-public slots:
-    void plotSlot();
+ public slots:
+  void print_graph(char *input_string);
 };
 
-#endif // PLOT_H
+#endif  // PLOT_H

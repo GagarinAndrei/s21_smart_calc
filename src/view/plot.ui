@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Graph</string>
   </property>
-  <widget class="QCustomPlot" name="widget" native="true">
+  <widget class="QCustomPlot" name="function_graph" native="true">
    <property name="geometry">
     <rect>
      <x>0</x>

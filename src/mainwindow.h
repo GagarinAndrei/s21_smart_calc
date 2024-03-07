@@ -4,13 +4,14 @@
 #define END 1000000
 
 #include <QMainWindow>
+#include <QVector>
+
 #include "view/credit.h"
 #include "view/deposite.h"
 #include "view/plot.h"
-#include <QVector>
 
 extern "C" {
-  #include "./headers/dijkstra_algorithm.h"
+#include "./headers/dijkstra_algorithm.h"
 }
 
 QT_BEGIN_NAMESPACE
@@ -22,12 +23,13 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow {
   Q_OBJECT
 
-public:
+ public:
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
-private slots:
-  void on_number_button_clicked();
+ private slots:
+  void text_to_display_on_button_clicked();
+  //  void on_button_clicked_with_adding_custom_text(QString);
   void on_dot_button_clicked();
   void on_pow_button_clicked();
   void on_unary_minus_button_clicked();
@@ -50,30 +52,34 @@ private slots:
   void on_log_button_clicked();
   void on_x_button_clicked();
   void on_result_button_clicked();
-  void on_rb_plot_toggled(bool checked);
 
-  void operator_button_availability(bool is_enabled, char operation);
-  void number_button_availability(bool is_enabled);
-  void arifmetics_availability(bool is_enabled);
-  void trigonometrics_availability(bool is_enabled);
+  void operator_button_availability(bool is_enabled);
+  //  void number_button_availability(bool is_enabled);
+  //  void arifmetics_availability(bool is_enabled);
+  //  void trigonometrics_availability(bool is_enabled);
+  //  void close_bracket_availability(bool is_enabled);
 
-  void after_open_bracket_buttons(bool is_enabled);
+  //  void after_open_bracket_buttons(bool is_enabled);
 
   void on_rB_credit_toggled(bool checked);
 
+  void on_rB_plot_toggled(bool checked);
+
   void on_rB_deposit_toggled(bool checked);
 
-  private:
+ private:
   Ui::MainWindow *ui;
-  Plot *plot;
+  Plot plot;
   Credit credit;
   Deposite deposite;
+  int openBracketCount = 0;
 
+ public:
+  //  signals:
+  //  void signalPlot(QString);
 
-  signals:
-  void sendStringToPlot(const char *);
+  //  public slots:
+  //  void plotSlot(QString);
 };
 
-
-
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H

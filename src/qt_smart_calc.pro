@@ -34,15 +34,16 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp \
     ../model/dijkstra_algorithm.c \
     ../model/token_stack.c \
     ../model/function_type_determinant.c \
     ../model/rpn_calculation.c \
+    mainwindow.cpp \
     qcustomplot.cpp \
     view/credit.cpp \
     view/deposite.cpp \
     view/plot.cpp
+
 
 HEADERS += \
     mainwindow.h \
@@ -55,6 +56,8 @@ HEADERS += \
     view/credit.h \
     view/deposite.h \
     view/plot.h
+
+
 FORMS += \
     mainwindow.ui \
     view/credit.ui \

@@ -7,16 +7,15 @@ namespace Ui {
 class Credit;
 }
 
-class Credit : public QWidget
-{
-    Q_OBJECT
+class Credit : public QWidget {
+  Q_OBJECT
 
-public:
-    explicit Credit(QWidget *parent = nullptr);
-    ~Credit();
+ public:
+  explicit Credit(QWidget *parent = nullptr);
+  ~Credit();
 
-private:
-    Ui::Credit *ui;
+ private:
+  Ui::Credit *ui;
 };
 
-#endif // CREDIT_H
+#endif  // CREDIT_H

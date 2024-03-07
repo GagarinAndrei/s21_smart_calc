@@ -7,16 +7,15 @@ namespace Ui {
 class Deposite;
 }
 
-class Deposite : public QWidget
-{
-    Q_OBJECT
+class Deposite : public QWidget {
+  Q_OBJECT
 
-public:
-    explicit Deposite(QWidget *parent = nullptr);
-    ~Deposite();
+ public:
+  explicit Deposite(QWidget *parent = nullptr);
+  ~Deposite();
 
-private:
-    Ui::Deposite *ui;
+ private:
+  Ui::Deposite *ui;
 };
 
-#endif // DEPOSITE_H
+#endif  // DEPOSITE_H

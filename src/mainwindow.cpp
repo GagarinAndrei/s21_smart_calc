@@ -1,19 +1,30 @@
 #include "mainwindow.h"
+
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-  connect(ui->pB_0, SIGNAL(clicked()), this, SLOT(on_number_button_clicked()));
-  connect(ui->pB_1, SIGNAL(clicked()), this, SLOT(on_number_button_clicked()));
-  connect(ui->pB_2, SIGNAL(clicked()), this, SLOT(on_number_button_clicked()));
-  connect(ui->pB_3, SIGNAL(clicked()), this, SLOT(on_number_button_clicked()));
-  connect(ui->pB_4, SIGNAL(clicked()), this, SLOT(on_number_button_clicked()));
-  connect(ui->pB_5, SIGNAL(clicked()), this, SLOT(on_number_button_clicked()));
-  connect(ui->pB_6, SIGNAL(clicked()), this, SLOT(on_number_button_clicked()));
-  connect(ui->pB_7, SIGNAL(clicked()), this, SLOT(on_number_button_clicked()));
-  connect(ui->pB_8, SIGNAL(clicked()), this, SLOT(on_number_button_clicked()));
-  connect(ui->pB_9, SIGNAL(clicked()), this, SLOT(on_number_button_clicked()));
+  connect(ui->pB_0, SIGNAL(clicked()), this,
+          SLOT(text_to_display_on_button_clicked()));
+  connect(ui->pB_1, SIGNAL(clicked()), this,
+          SLOT(text_to_display_on_button_clicked()));
+  connect(ui->pB_2, SIGNAL(clicked()), this,
+          SLOT(text_to_display_on_button_clicked()));
+  connect(ui->pB_3, SIGNAL(clicked()), this,
+          SLOT(text_to_display_on_button_clicked()));
+  connect(ui->pB_4, SIGNAL(clicked()), this,
+          SLOT(text_to_display_on_button_clicked()));
+  connect(ui->pB_5, SIGNAL(clicked()), this,
+          SLOT(text_to_display_on_button_clicked()));
+  connect(ui->pB_6, SIGNAL(clicked()), this,
+          SLOT(text_to_display_on_button_clicked()));
+  connect(ui->pB_7, SIGNAL(clicked()), this,
+          SLOT(text_to_display_on_button_clicked()));
+  connect(ui->pB_8, SIGNAL(clicked()), this,
+          SLOT(text_to_display_on_button_clicked()));
+  connect(ui->pB_9, SIGNAL(clicked()), this,
+          SLOT(text_to_display_on_button_clicked()));
   connect(ui->pB_dot, SIGNAL(clicked()), this, SLOT(on_dot_button_clicked()));
   connect(ui->pB_pow, SIGNAL(clicked()), this, SLOT(on_pow_button_clicked()));
   connect(ui->pB_unary_minus, SIGNAL(clicked()), this,
@@ -40,79 +51,41 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->pB_ln, SIGNAL(clicked()), this, SLOT(on_ln_button_clicked()));
   connect(ui->pB_log, SIGNAL(clicked()), this, SLOT(on_log_button_clicked()));
   connect(ui->pB_x, SIGNAL(clicked()), this, SLOT(on_x_button_clicked()));
+
   connect(ui->pB_result, SIGNAL(clicked()), this,
           SLOT(on_result_button_clicked()));
 
-  plot = new Plot;
-  connect(this, &MainWindow::sendStringToPlot, plot, &Plot::plotSlot);
+  operator_button_availability(false);
 }
 
 MainWindow::~MainWindow() { delete ui; }
 
-void MainWindow::on_number_button_clicked() {
-
+void MainWindow::text_to_display_on_button_clicked() {
   if (ui->display->text() == "0") {
     ui->display->clear();
   }
 
   QPushButton *button = (QPushButton *)sender();
-  QString expressionString;
+  QString expression_string;
 
-  expressionString = ui->display->text() + button->text();
-  ui->display->setText(expressionString);
-  operator_button_availability(true, 0);
-  trigonometrics_availability(false);
-  ui->pB_x->setEnabled(false);
-
+  expression_string = ui->display->text() + button->text();
+  ui->display->setText(expression_string);
+  operator_button_availability(true);
 }
 
-void MainWindow::on_dot_button_clicked() {
-    ui->display->setText(ui->display->text() + ".");
-    ui->pB_dot->setEnabled(false);
-}
-
-void MainWindow::on_pow_button_clicked() {
-  if (ui->display->text() == "0") {
-    ui->display->clear();
-  }
-  ui->display->setText(ui->display->text() + "^");
-  operator_button_availability(false, 0);
-  number_button_availability(true);
-  trigonometrics_availability(true);
-  ui->pB_dot->setEnabled(true);
-}
-
-void MainWindow::on_mod_button_clicked() {
-  if (ui->display->text() == "0") {
-    ui->display->clear();
-  }
-  ui->display->setText(ui->display->text() + "mod");
-  operator_button_availability(false, '(');
-  number_button_availability(true);
-  trigonometrics_availability(true);
-  ui->pB_dot->setEnabled(true);
-}
-
-void MainWindow::on_unary_minus_button_clicked() {
-  if (ui->display->text() == "0") {
-    ui->display->clear();
-  }
-  ui->display->setText(ui->display->text() + "-");
-  operator_button_availability(false, 0);
-  number_button_availability(true);
-  trigonometrics_availability(true);
-  ui->pB_dot->setEnabled(true);
-}
+// void MainWindow::on_button_clicked_with_adding_custom_text(QString string)
+//{
+//     button_text_to_display_on_button_clicked();
+//     QString expression_string;
+//     expression_string = ui->display->text() + string;
+//     ui->display->setText(expression_string);
+// }
 
 void MainWindow::on_open_bracket_button_clicked() {
   if (ui->display->text() == "0") {
     ui->display->clear();
   }
-  ui->display->setText(ui->display->text() + "(");
-  operator_button_availability(false, '(');
-  number_button_availability(true);
-  trigonometrics_availability(true);
-  ui->pB_dot->setEnabled(true);
+  openBracketCount++;
 }
 
 void MainWindow::on_close_bracket_button_clicked() {
@@ -120,8 +93,37 @@ void MainWindow::on_close_bracket_button_clicked() {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + ")");
-  number_button_availability(false);
+  openBracketCount--;
+  if (openBracketCount <= 0) {
+    ui->pB_close_bracket->setEnabled(false);
+  }
+}
 
+void MainWindow::on_dot_button_clicked() {
+  ui->display->setText(ui->display->text() + ".");
+  ui->pB_dot->setEnabled(false);
+}
+
+//============================================================
+void MainWindow::on_pow_button_clicked() {
+  if (ui->display->text() == "0") {
+    ui->display->clear();
+  }
+  ui->display->setText(ui->display->text() + "^");
+}
+
+void MainWindow::on_mod_button_clicked() {
+  if (ui->display->text() == "0") {
+    ui->display->clear();
+  }
+  ui->display->setText(ui->display->text() + "mod");
+}
+
+void MainWindow::on_unary_minus_button_clicked() {
+  if (ui->display->text() == "0") {
+    ui->display->clear();
+  }
+  ui->display->setText(ui->display->text() + "-");
 }
 
 void MainWindow::on_mult_button_clicked() {
@@ -129,10 +131,6 @@ void MainWindow::on_mult_button_clicked() {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "*");
-  operator_button_availability(false, 0);
-  number_button_availability(true);
-  trigonometrics_availability(true);
-  ui->pB_dot->setEnabled(true);
 }
 
 void MainWindow::on_div_button_clicked() {
@@ -140,11 +138,6 @@ void MainWindow::on_div_button_clicked() {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "/");
-  operator_button_availability(false, 0);
-  number_button_availability(true);
-  ui->pB_0->setEnabled(false);
-  trigonometrics_availability(true);
-   ui->pB_dot->setEnabled(true);
 }
 
 void MainWindow::on_plus_button_clicked() {
@@ -152,10 +145,6 @@ void MainWindow::on_plus_button_clicked() {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "+");
-  operator_button_availability(false, 0);
-  number_button_availability(true);
-  trigonometrics_availability(true);
-ui->pB_dot->setEnabled(true);
 }
 
 void MainWindow::on_minus_button_clicked() {
@@ -163,21 +152,15 @@ void MainWindow::on_minus_button_clicked() {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "-");
-  operator_button_availability(false, 0);
-  number_button_availability(true);
-  trigonometrics_availability(true);
-ui->pB_dot->setEnabled(true);
 }
 
+//===========================================================
 void MainWindow::on_sqrt_button_clicked() {
   if (ui->display->text() == "0") {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "sqrt(");
-  operator_button_availability(false, '(');
-  number_button_availability(true);
-  trigonometrics_availability(true);
-ui->pB_dot->setEnabled(true);
+  openBracketCount++;
 }
 
 void MainWindow::on_cos_button_clicked() {
@@ -185,10 +168,7 @@ void MainWindow::on_cos_button_clicked() {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "cos(");
-  operator_button_availability(false, '(');
-  number_button_availability(true);
-  trigonometrics_availability(true);
-ui->pB_dot->setEnabled(true);
+  openBracketCount++;
 }
 
 void MainWindow::on_sin_button_clicked() {
@@ -196,10 +176,7 @@ void MainWindow::on_sin_button_clicked() {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "sin(");
-  operator_button_availability(false, '(');
-  number_button_availability(true);
-  trigonometrics_availability(true);
-ui->pB_dot->setEnabled(true);
+  openBracketCount++;
 }
 
 void MainWindow::on_tan_button_clicked() {
@@ -207,10 +184,7 @@ void MainWindow::on_tan_button_clicked() {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "tan(");
-  operator_button_availability(false, '(');
-  number_button_availability(true);
-  trigonometrics_availability(true);
-ui->pB_dot->setEnabled(true);
+  openBracketCount++;
 }
 
 void MainWindow::on_asin_button_clicked() {
@@ -218,10 +192,7 @@ void MainWindow::on_asin_button_clicked() {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "asin(");
-  operator_button_availability(false, '(');
-  number_button_availability(true);
-  trigonometrics_availability(true);
-ui->pB_dot->setEnabled(true);
+  openBracketCount++;
 }
 
 void MainWindow::on_acos_button_clicked() {
@@ -229,10 +200,7 @@ void MainWindow::on_acos_button_clicked() {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "acos(");
-  operator_button_availability(false, '(');
-  number_button_availability(true);
-  trigonometrics_availability(true);
-ui->pB_dot->setEnabled(true);
+  openBracketCount++;
 }
 
 void MainWindow::on_atan_button_clicked() {
@@ -240,10 +208,7 @@ void MainWindow::on_atan_button_clicked() {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "atan(");
-  operator_button_availability(false, '(');
-  number_button_availability(true);
-  trigonometrics_availability(true);
-ui->pB_dot->setEnabled(true);
+  openBracketCount++;
 }
 
 void MainWindow::on_ln_button_clicked() {
@@ -251,10 +216,7 @@ void MainWindow::on_ln_button_clicked() {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "ln(");
-  operator_button_availability(false, '(');
-  number_button_availability(true);
-  trigonometrics_availability(true);
-ui->pB_dot->setEnabled(true);
+  openBracketCount++;
 }
 
 void MainWindow::on_log_button_clicked() {
@@ -262,137 +224,132 @@ void MainWindow::on_log_button_clicked() {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "log(");
-  operator_button_availability(false, '(');
-  number_button_availability(true);
-  trigonometrics_availability(true);
-ui->pB_dot->setEnabled(true);
+  openBracketCount++;
 }
+//=================================================================
 
 void MainWindow::on_x_button_clicked() {
   if (ui->display->text() == "0") {
     ui->display->clear();
   }
   ui->display->setText(ui->display->text() + "x");
-  operator_button_availability(false, '(');
-  number_button_availability(false);
-  trigonometrics_availability(false);
-  arifmetics_availability(true);
   ui->pB_close_bracket->setEnabled(true);
 }
 
 void MainWindow::on_clear_button_clicked() {
   ui->display->clear();
   ui->display->setText("0");
-  operator_button_availability(true, 0);
-  number_button_availability(true);
-  trigonometrics_availability(true);
-  ui->pB_dot->setEnabled(true);
+  openBracketCount = 0;
 }
 
 void MainWindow::on_result_button_clicked() {
   QString string = ui->display->text();
   QByteArray ba = string.toLocal8Bit();
-  char *inputString = ba.data();
+  char *input_string = ba.data();
   double xValue = ui->dSB_xValue->value();
   double result;
-  result = dijkstraAlgorithm(inputString, xValue);
-  string = QString::number(result);
-  ui->display->setText(string);
-  number_button_availability(true);
-  operator_button_availability(true, 0);
-  trigonometrics_availability(true);
-  ui->pB_dot->setEnabled(true);
 
+  openBracketCount = 0;
+  if (ui->rB_plot->isChecked()) {
+    plot.print_graph(input_string);
+  } else {
+    result = dijkstraAlgorithm(input_string, xValue);
+    string = QString::number(result);
+    ui->display->setText(string);
+  }
 }
 
-void MainWindow::on_rb_plot_toggled(bool checked)
-{
-    if (checked == true) {
-        QString string = ui->display->text();
-        QByteArray ba = string.toLocal8Bit();
-        char *inputString = ba.data();
-        emit sendStringToPlot(inputString);
-        plot->show();
-    } else {
-        plot->close();
-    }
+void MainWindow::operator_button_availability(bool is_enabled) {
+  ui->pB_plus->setEnabled(is_enabled);
+  ui->pB_minus->setEnabled(is_enabled);
+  ui->pB_mult->setEnabled(is_enabled);
+  ui->pB_div->setEnabled(is_enabled);
+  ui->pB_pow->setEnabled(is_enabled);
+  ui->pB_mod->setEnabled(is_enabled);
 }
 
-void MainWindow::on_rB_credit_toggled(bool checked)
-{
-    if (checked == true) {
-        credit.show();
-    } else {
-        credit.close();
-    }
+//    if (openBracketCount > 0) {
+//        after_open_bracket_buttons(is_enabled);
+//    } else {
+//    ui->pB_close_bracket->setEnabled(is_enabled);
+//    trigonometrics_availability(is_enabled);
+//    arifmetics_availability(is_enabled);
+//    ui->pB_unary_minus->setEnabled(is_enabled);
+//    }
+//}
+
+// void MainWindow::after_open_bracket_buttons(bool is_enabled) {
+//     ui->pB_close_bracket->setEnabled(is_enabled);
+//     ui->pB_mod->setEnabled(is_enabled);
+//     ui->pB_dot->setEnabled(is_enabled);
+//     ui->pB_plus->setEnabled(is_enabled);
+//     ui->pB_minus->setEnabled(is_enabled);
+//     ui->pB_mult->setEnabled(is_enabled);
+//     ui->pB_div->setEnabled(is_enabled);
+// }
+
+// void MainWindow::number_button_availability(bool is_enabled) {
+//     ui->pB_0->setEnabled(is_enabled);
+//     ui->pB_1->setEnabled(is_enabled);
+//     ui->pB_2->setEnabled(is_enabled);
+//     ui->pB_3->setEnabled(is_enabled);
+//     ui->pB_4->setEnabled(is_enabled);
+//     ui->pB_5->setEnabled(is_enabled);
+//     ui->pB_6->setEnabled(is_enabled);
+//     ui->pB_7->setEnabled(is_enabled);
+//     ui->pB_8->setEnabled(is_enabled);
+//     ui->pB_9->setEnabled(is_enabled);
+// }
+
+// void MainWindow::arifmetics_availability(bool is_enabled) {
+//     ui->pB_mod->setEnabled(is_enabled);
+//     ui->pB_pow->setEnabled(is_enabled);
+//     ui->pB_plus->setEnabled(is_enabled);
+//     ui->pB_minus->setEnabled(is_enabled);
+//     ui->pB_mult->setEnabled(is_enabled);
+//     ui->pB_div->setEnabled(is_enabled);
+// }
+
+// void MainWindow::trigonometrics_availability(bool is_enabled) {
+//     ui->pB_acos->setEnabled(is_enabled);
+//     ui->pB_asin->setEnabled(is_enabled);
+//     ui->pB_atan->setEnabled(is_enabled);
+//     ui->pB_cos->setEnabled(is_enabled);
+//     ui->pB_sin->setEnabled(is_enabled);
+//     ui->pB_tan->setEnabled(is_enabled);
+//     ui->pB_sqrt->setEnabled(is_enabled);
+//     ui->pB_ln->setEnabled(is_enabled);
+//     ui->pB_log->setEnabled(is_enabled);
+//     ui->pB_x->setEnabled(is_enabled);
+// }
+
+// void MainWindow::close_bracket_availability(bool is_enabled)
+//{
+//     if (openBracketCount <= 0) {
+//         ui->pB_close_bracket->setEnabled(is_enabled);
+//     }
+// }
+
+void MainWindow::on_rB_credit_toggled(bool checked) {
+  if (checked == true) {
+    credit.show();
+  } else {
+    credit.close();
+  }
 }
 
-void MainWindow::on_rB_deposit_toggled(bool checked)
-{
-    if (checked == true) {
-        deposite.show();
-    } else {
-        deposite.close();
-    }
+void MainWindow::on_rB_plot_toggled(bool checked) {
+  if (checked) {
+    plot.show();
+  } else {
+    plot.close();
+  }
 }
 
-
-void MainWindow::operator_button_availability(bool is_enabled, char operation) {
-    if (operation == '(') {
-        after_open_bracket_buttons(is_enabled);
-    } else {
-    ui->pB_close_bracket->setEnabled(is_enabled);
-    trigonometrics_availability(is_enabled);
-    arifmetics_availability(is_enabled);
-    ui->pB_unary_minus->setEnabled(is_enabled);
-    }
+void MainWindow::on_rB_deposit_toggled(bool checked) {
+  if (checked == true) {
+    deposite.show();
+  } else {
+    deposite.close();
+  }
 }
-
-void MainWindow::after_open_bracket_buttons(bool is_enabled) {
-    ui->pB_close_bracket->setEnabled(is_enabled);
-    ui->pB_mod->setEnabled(is_enabled);
-    ui->pB_dot->setEnabled(is_enabled);
-    ui->pB_plus->setEnabled(is_enabled);
-    ui->pB_minus->setEnabled(is_enabled);
-    ui->pB_mult->setEnabled(is_enabled);
-    ui->pB_div->setEnabled(is_enabled);
-}
-
-void MainWindow::number_button_availability(bool is_enabled) {
-    ui->pB_0->setEnabled(is_enabled);
-    ui->pB_1->setEnabled(is_enabled);
-    ui->pB_2->setEnabled(is_enabled);
-    ui->pB_3->setEnabled(is_enabled);
-    ui->pB_4->setEnabled(is_enabled);
-    ui->pB_5->setEnabled(is_enabled);
-    ui->pB_6->setEnabled(is_enabled);
-    ui->pB_7->setEnabled(is_enabled);
-    ui->pB_8->setEnabled(is_enabled);
-    ui->pB_9->setEnabled(is_enabled);
-}
-
-void MainWindow::arifmetics_availability(bool is_enabled) {
-    ui->pB_mod->setEnabled(is_enabled);
-    ui->pB_pow->setEnabled(is_enabled);
-    // ui->pB_dot->setEnabled(is_enabled);
-    ui->pB_plus->setEnabled(is_enabled);
-    ui->pB_minus->setEnabled(is_enabled);
-    ui->pB_mult->setEnabled(is_enabled);
-    ui->pB_div->setEnabled(is_enabled);
-    // ui->pB_x->setEnabled(is_enabled);
-}
-
-void MainWindow::trigonometrics_availability(bool is_enabled) {
-    ui->pB_acos->setEnabled(is_enabled);
-    ui->pB_asin->setEnabled(is_enabled);
-    ui->pB_atan->setEnabled(is_enabled);
-    ui->pB_cos->setEnabled(is_enabled);
-    ui->pB_sin->setEnabled(is_enabled);
-    ui->pB_tan->setEnabled(is_enabled);
-    ui->pB_sqrt->setEnabled(is_enabled);
-    ui->pB_ln->setEnabled(is_enabled);
-    ui->pB_log->setEnabled(is_enabled);
-    ui->pB_x->setEnabled(is_enabled);
-}
-
-

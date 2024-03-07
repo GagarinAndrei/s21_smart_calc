@@ -90,6 +90,14 @@ START_TEST(arithmetics_10) {
   ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
 }
 
+START_TEST(arithmetics_11) {
+  char *string = "2*(-sin(4+4))";
+  long double reference = 2 * (-sin(4 + 4));
+  long double result;
+  result = dijkstraAlgorithm(string, 0);
+  ck_assert_ldouble_eq_tol(reference, result, ACCURACY);
+}
+
 Suite *testArithmetics(void) {
   Suite *suite = suite_create("\033[45m-=ARITHMETICS=-\033[0m");
   TCase *test_case = tcase_create("arithmetics_test_case");
@@ -105,6 +113,7 @@ Suite *testArithmetics(void) {
   tcase_add_test(test_case, arithmetics_8);
   tcase_add_test(test_case, arithmetics_9);
   tcase_add_test(test_case, arithmetics_10);
+  tcase_add_test(test_case, arithmetics_11);
 
   suite_add_tcase(suite, test_case);
   return suite;
