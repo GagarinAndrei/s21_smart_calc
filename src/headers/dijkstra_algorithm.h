@@ -15,7 +15,7 @@
 long double dijkstraAlgorithm(char *string, double x);
 char *parceOperator(char *ptrInputString, Stack *operators, Stack *values,
                     int *isValueInBrackets, int *numberOfBrackets,
-                    int *isPrevOperator, long double x);
+                    int *isPrevOperator);
 char *parceValue(char *ptrInputString, Stack *values, int *isValueInBrackets,
                  int *numberCounter);
 char *parceFunction(char *ptrInputString, Stack *operators);

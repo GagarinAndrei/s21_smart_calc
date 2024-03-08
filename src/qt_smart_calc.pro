@@ -38,6 +38,7 @@ SOURCES += \
     ../model/token_stack.c \
     ../model/function_type_determinant.c \
     ../model/rpn_calculation.c \
+    ../model/credits.c \
     mainwindow.cpp \
     qcustomplot.cpp \
     view/credit.cpp \
@@ -52,6 +53,7 @@ HEADERS += \
     ../headers/function_type_determinant.h \
     ../headers/rpn_calculation.h \
     ../headers/smart_calc.h \
+    ../headers/credits.h \
     qcustomplot.h \
     view/credit.h \
     view/deposite.h \

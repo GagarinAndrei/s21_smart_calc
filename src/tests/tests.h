@@ -7,8 +7,10 @@
 #include "../headers/dijkstra_algorithm.h"
 #include "../headers/token_stack.h"
 #include "../headers/rpn_calculation.h"
+#include "../headers/credits.h"
 
 Suite *testArithmetics(void);
 Suite *testFunctions(void);
+Suite *testCredits(void);
 
 #endif

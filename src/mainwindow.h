@@ -29,10 +29,10 @@ class MainWindow : public QMainWindow {
 
  private slots:
   void text_to_display_on_button_clicked();
-  //  void on_button_clicked_with_adding_custom_text(QString);
   void on_dot_button_clicked();
   void on_pow_button_clicked();
   void on_unary_minus_button_clicked();
+  void on_unary_plus_button_clicked();
   void on_mod_button_clicked();
   void on_open_bracket_button_clicked();
   void on_close_bracket_button_clicked();
@@ -54,17 +54,13 @@ class MainWindow : public QMainWindow {
   void on_result_button_clicked();
 
   void operator_button_availability(bool is_enabled);
-  //  void number_button_availability(bool is_enabled);
-  //  void arifmetics_availability(bool is_enabled);
-  //  void trigonometrics_availability(bool is_enabled);
-  //  void close_bracket_availability(bool is_enabled);
-
-  //  void after_open_bracket_buttons(bool is_enabled);
+  void number_button_availability(bool is_enabled);
+  void trigonometrics_button_availability(bool is_enabled);
+  void close_bracket_and_result_availability(int open_brackets_count);
+  void dot_availability(bool is_dot_present_in_number, bool is_digit);
 
   void on_rB_credit_toggled(bool checked);
-
   void on_rB_plot_toggled(bool checked);
-
   void on_rB_deposit_toggled(bool checked);
 
  private:
@@ -72,14 +68,9 @@ class MainWindow : public QMainWindow {
   Plot plot;
   Credit credit;
   Deposite deposite;
-  int openBracketCount = 0;
-
- public:
-  //  signals:
-  //  void signalPlot(QString);
-
-  //  public slots:
-  //  void plotSlot(QString);
+  int open_bracket_count = 0;
+  bool is_dot_present_in_digit;
+  bool is_digit;
 };
 
 #endif  // MAINWINDOW_H

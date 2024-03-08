@@ -1026,8 +1026,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 255, 255, 255), stop:0.339795 rgba(255, 255, 255, 255), stop:0.339799 rgba(0, 0, 255, 255), stop:0.662444 rgba(0, 0, 255, 255), stop:0.662469 rgba(255, 0, 0, 255), stop:1 rgba(255, 0, 0, 255));
-color: yellow</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>=</string>
@@ -2140,7 +2139,7 @@ color: yellow</string>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="bG_numbers"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="bG_numbers"/>
  </buttongroups>
 </ui>

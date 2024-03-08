@@ -174,8 +174,8 @@ START_TEST(log_1) {
 
 START_TEST(x_1) {
   double x = 3;
-  char *string = "x^2+2*x+2";
-  long double reference = pow(x, 2) + 2 * x + 2;
+  char *string = "x^2*2-x-1";
+  long double reference = pow(x, 2.0) * 2.0 - x - 1;
   long double result;
   result = dijkstraAlgorithm(string, x);
   ck_assert_double_eq_tol(reference, result, ACCURACY);

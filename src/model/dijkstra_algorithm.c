@@ -12,15 +12,20 @@ long double dijkstraAlgorithm(char *inputString, double x) {
   init(&values);
   char *ptrInputString = inputString;
   while (*ptrInputString != '\0') {
-    if (isdigit(*ptrInputString)) {
-      ptrInputString = parceValue(ptrInputString, &values, &isValueInBrackets,
-                                  &numberCounter);
+    if (isdigit(*ptrInputString) || *ptrInputString == 'x') {
+      if (*ptrInputString != 'x') {
+        ptrInputString = parceValue(ptrInputString, &values, &isValueInBrackets,
+                                    &numberCounter);
+      } else {
+        push(CHUSHPAN, 0, x, isValueInBrackets, &values);
+        ptrInputString++;
+      }
       isPrevOperator = FALSE;
     } else {
+      ptrInputString = parceFunction(ptrInputString, &operators);
       ptrInputString =
           parceOperator(ptrInputString, &operators, &values, &isValueInBrackets,
-                        &numberCounter, &isPrevOperator, x);
-      ptrInputString = parceFunction(ptrInputString, &operators);
+                        &numberCounter, &isPrevOperator);
       isPrevOperator = TRUE;
     }
   }
@@ -37,13 +42,9 @@ long double dijkstraAlgorithm(char *inputString, double x) {
 
 char *parceOperator(char *ptrInputString, Stack *operators, Stack *values,
                     int *isValueInBrackets, int *numberCounter,
-                    int *isPrevOperator, long double x) {
+                    int *isPrevOperator) {
   int currentPriority = SKORLUPA;
   switch (*ptrInputString) {
-    case 'x':
-      push(CHUSHPAN, 0, x, *isValueInBrackets, values);
-      ptrInputString++;
-      break;
     case '(':
       *isValueInBrackets = true;
       push(CHUSHPAN, OPEN_PARENTHESIS, 0, *isValueInBrackets, operators);
@@ -60,7 +61,9 @@ char *parceOperator(char *ptrInputString, Stack *operators, Stack *values,
       ptrInputString++;
       break;
     case '+':
-      calculationLogic(operators, values, PLUS, SKORLUPA, numberCounter);
+      if (values->stackSize != 0 && *isPrevOperator == FALSE) {
+        calculationLogic(operators, values, PLUS, SKORLUPA, numberCounter);
+      }
       ptrInputString++;
       break;
     case '-':

@@ -5,7 +5,8 @@
 int main(void) {
   int failed = 0;
 
-  Suite *s21_matrix_test[] = {testArithmetics(), testFunctions(), NULL};
+  Suite *s21_matrix_test[] = {testArithmetics(), testFunctions(), testCredits(),
+                              NULL};
 
   for (int i = 0; s21_matrix_test[i] != NULL; ++i) {
     SRunner *sr = srunner_create(s21_matrix_test[i]);
