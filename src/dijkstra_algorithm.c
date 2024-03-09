@@ -1,4 +1,4 @@
-#include "../headers/dijkstra_algorithm.h"
+#include "headers/dijkstra_algorithm.h"
 
 #include <stdbool.h>
 

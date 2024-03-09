@@ -1,8 +1,8 @@
-#include "../headers/rpn_calculation.h"
+#include "headers/rpn_calculation.h"
 
 #include <math.h>
 
-#include "../headers/dijkstra_algorithm.h"
+#include "headers/dijkstra_algorithm.h"
 
 void calculationLogic(Stack *operators, Stack *values, int currentOperator,
                       int currentPriority, int *numberCounter) {
