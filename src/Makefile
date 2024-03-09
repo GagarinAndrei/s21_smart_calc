@@ -1,9 +1,8 @@
-
 CC=gcc
 STDFLAGS=-Wall -Werror -Wextra -std=c11 
-TST_CFLAGS:= -g $(STDFLAGS) -g
+TST_CFLAGS:=$(STDFLAGS) -g
 GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
-LINUX_FLAGS=-lsubunit -lrt -lpthread -lm
+LINUX_FLAGS=-lrt -lpthread -lm #-lsubunit
 LIBS=-lcheck
 APP = build/SmartCalc.app 
 VALGRIND_FLAGS=--trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose
@@ -19,14 +18,16 @@ OS := $(shell uname -s)
 USERNAME=$(shell whoami)
 
 ifeq ($(OS),Linux)
-  OPEN_CMD = xdg-open
+  OPEN_CMD = firefox
+	APP_NAME = qt_smart_calc SmartCalc.app
 endif
 ifeq ($(OS),Darwin)
 	OPEN_CMD = open
+	APP_NAME = qt_smart_calc.app SmartCalc.app
 endif
 
 .DELETE_ON_ERROR:
-all: $(TARGET) install
+all: $(TARGET)
 
 $(TARGET): ${SRC}
 	$(CC) -c $(STDFLAGS) $(SRC)
@@ -37,7 +38,8 @@ $(TARGET): ${SRC}
 
 build:
 	mkdir build
-	cd ./build/ && qmake ../ && make  && mv qt_smart_calc.app SmartCalc.app
+	cd ./build/ && qmake ../ && make  && mv $(APP_NAME)
+# qt_smart_calc.app SmartCalc.app
 
 install: build
 	@mkdir $(HOME)/Desktop/SmartCalc_v1.0/
@@ -82,7 +84,7 @@ endif
 
 valgrind: $(TARGET)
 	$(CC) $(TST_CFLAGS) ${TEST_SRC} $< -o test $(LIBS) $(LINUX_FLAGS)
-	CK_FORK=no valgrind $(VALGRIND_FLAGS) --log-file=RESULT_VALGRIND.txt ./test
+	CK_FORK=no valgrind $(VALGRIND_FLAGS) --log-file=VALGRIND.txt ./test
 
 clang:
 	cp ../materials/linters/.clang-format ../src/.clang-format; \
@@ -118,7 +120,7 @@ clean_test:
 
 clean: clean_lib clean_lib clean_test clean_obj
 	rm -rf unit_test
-	rm -rf RESULT_VALGRIND.txt
+	rm -rf VALGRIND.txt
 	rm -rf *.o *.a
 	rm -rf *.gcda *.gcno *.info
 	rm -rf s21_test report
