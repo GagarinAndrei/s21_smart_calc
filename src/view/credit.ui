@@ -249,6 +249,28 @@
      </widget>
     </item>
     <item>
+     <widget class="QDoubleSpinBox" name="dSB_monthly_payments_2">
+      <property name="font">
+       <font>
+        <family>Fira Code</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::NoButtons</enum>
+      </property>
+      <property name="maximum">
+       <double>10000000000.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QLabel" name="l_total_payout">
       <property name="font">
        <font>

@@ -363,6 +363,7 @@ void MainWindow::on_x_button_clicked() {
   trigonometrics_button_availability(false);
   is_digit = false;
   is_dot_present_in_digit = false;
+  ui->pB_dot->setEnabled(false);
 }
 
 void MainWindow::on_clear_button_clicked() {

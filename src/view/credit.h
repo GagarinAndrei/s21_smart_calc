@@ -23,9 +23,9 @@ class Credit : public QWidget {
 
  private:
   Ui::Credit *ui;
-  double monthly_peyments, total_payout, interest_charges, credit_amount,
-      max_payment, min_payment, interest_rate;
-  int credit_term;
+  double total_payout = 0, interest_charges = 0, credit_amount = 0,
+         max_payment = 0, min_payment = 0, interest_rate = 0;
+  int credit_term = 0;
 };
 
 #endif  // CREDIT_H
