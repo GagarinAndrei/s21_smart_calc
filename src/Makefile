@@ -2,7 +2,7 @@ CC=gcc
 STDFLAGS=-Wall -Werror -Wextra -std=c11 
 TST_CFLAGS:=$(STDFLAGS) -g
 GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
-LINUX_FLAGS=-lrt -lpthread -lm #-lsubunit
+LINUX_FLAGS=-lrt -lpthread -lm -lsubunit
 LIBS=-lcheck
 APP = build/SmartCalc.app 
 VALGRIND_FLAGS=--trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose
@@ -39,7 +39,6 @@ $(TARGET): ${SRC}
 build:
 	mkdir build
 	cd ./build/ && qmake ../ && make  && mv $(APP_NAME)
-# qt_smart_calc.app SmartCalc.app
 
 install: build
 	@mkdir $(HOME)/Desktop/SmartCalc_v1.0/
