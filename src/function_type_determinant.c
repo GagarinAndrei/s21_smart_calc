@@ -1,4 +1,4 @@
-#include "../headers/function_type_determinant.h"
+#include "headers/function_type_determinant.h"
 
 int functionTypeDeterminant(char *ptrInputString, int *functionType) {
   int funcSize = 0;

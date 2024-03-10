@@ -1,9 +1,9 @@
-#include "../headers/credits.h"
+#include "headers/credits.h"
 
 #include <math.h>
 
 void annuity(double creditAmount, double interestRate, int creditTerm,
-             double* result) {
+             double *result) {
   double annuityCoefficient;
   double monthlyInterestRate = interestRate / (100 * 12);
   annuityCoefficient =

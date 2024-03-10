@@ -4,10 +4,10 @@
 #include <check.h>
 #include <stdio.h>
 
-#include "../headers/dijkstra_algorithm.h"
-#include "../headers/token_stack.h"
-#include "../headers/rpn_calculation.h"
 #include "../headers/credits.h"
+#include "../headers/dijkstra_algorithm.h"
+#include "../headers/rpn_calculation.h"
+#include "../headers/token_stack.h"
 
 Suite *testArithmetics(void);
 Suite *testFunctions(void);

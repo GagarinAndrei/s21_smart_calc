@@ -34,11 +34,11 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    ../model/dijkstra_algorithm.c \
-    ../model/token_stack.c \
-    ../model/function_type_determinant.c \
-    ../model/rpn_calculation.c \
-    ../model/credits.c \
+    ../dijkstra_algorithm.c \
+    ../token_stack.c \
+    ../function_type_determinant.c \
+    ../rpn_calculation.c \
+    ../credits.c \
     mainwindow.cpp \
     qcustomplot.cpp \
     view/credit.cpp \

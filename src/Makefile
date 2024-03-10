@@ -1,31 +1,29 @@
-
 CC=gcc
 STDFLAGS=-Wall -Werror -Wextra -std=c11 
-TST_CFLAGS:= -g $(STDFLAGS) -g
+TST_CFLAGS:=$(STDFLAGS) -g
 GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
-LINUX_FLAGS=-lsubunit -lrt -lpthread -lm
+LINUX_FLAGS=-lrt -lpthread -lm -lsubunit
 LIBS=-lcheck
 APP = build/SmartCalc.app 
 VALGRIND_FLAGS=--trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose
 
-TARGET=s21_matrix.a
+TARGET=s21_smart_calc.a
 
-SRC=$(wildcard model/*.c)
+SRC=$(wildcard *.c)
 OBJ=$(patsubst %.c,%.o, ${SRC})
-# HEADER=$(wildcard s21_*.h)
 
 PREF_TEST_SRC=./tests/
 TEST_SRC=$(wildcard $(PREF_TEST_SRC)/*.c)
-# TEST_OBJ = $(patsubst %.c,%.o, ${TEST_SRC})
-
 OS := $(shell uname -s)
 USERNAME=$(shell whoami)
 
 ifeq ($(OS),Linux)
-  OPEN_CMD = xdg-open
+  OPEN_CMD = firefox
+	APP_NAME = qt_smart_calc SmartCalc.app
 endif
 ifeq ($(OS),Darwin)
 	OPEN_CMD = open
+	APP_NAME = qt_smart_calc.app SmartCalc.app
 endif
 
 .DELETE_ON_ERROR:
@@ -40,7 +38,7 @@ $(TARGET): ${SRC}
 
 build:
 	mkdir build
-	cd ./build/ && qmake ../ && make  && mv qt_smart_calc.app SmartCalc.app
+	cd ./build/ && qmake ../ && make  && mv $(APP_NAME)
 
 install: build
 	@mkdir $(HOME)/Desktop/SmartCalc_v1.0/
@@ -51,7 +49,7 @@ uninstall:
 	@rm -rf $(HOME)/Desktop/SmartCalc_v1.0/
 
 dvi:
-	open Calculator.html
+	open ../README.md
 
 dist:
 	mkdir SmartCalc_v1.0/
@@ -61,7 +59,7 @@ dist:
 	mv SmartCalc_v1.0.tgz $(HOME)/Desktop/
 	rm -rf SmartCalc_v1.0/
 
-tests: $(TARGET)
+test: $(TARGET)
 ifeq ($(OS), Darwin)
 	${CC} $(STDFLAGS) ${TEST_SRC} $< -o unit_test $(LIBS)
 else
@@ -85,11 +83,11 @@ endif
 
 valgrind: $(TARGET)
 	$(CC) $(TST_CFLAGS) ${TEST_SRC} $< -o test $(LIBS) $(LINUX_FLAGS)
-	CK_FORK=no valgrind $(VALGRIND_FLAGS) --log-file=RESULT_VALGRIND.txt ./test
+	CK_FORK=no valgrind $(VALGRIND_FLAGS) --log-file=VALGRIND.txt ./test
 
 clang:
 	cp ../materials/linters/.clang-format ../src/.clang-format; \
-	clang-format -style=Google -n *.c *.h; \
+	clang-format -style=google -n *.c *.h *.cpp; \
 	rm .clang-format
 
 brew:
@@ -121,7 +119,7 @@ clean_test:
 
 clean: clean_lib clean_lib clean_test clean_obj
 	rm -rf unit_test
-	rm -rf RESULT_VALGRIND.txt
+	rm -rf VALGRIND.txt
 	rm -rf *.o *.a
 	rm -rf *.gcda *.gcno *.info
 	rm -rf s21_test report
@@ -129,57 +127,3 @@ clean: clean_lib clean_lib clean_test clean_obj
 	rm -rf ./build*
 
 .PHONY: all clean check lcov
-
-
-
-# # all, install, uninstall, clean, dvi, dist, test, gcov_report
-# GCC=gcc -g
-# CFALGS=-Wall -Werror -Wextra -std=c11
-# SOURCES=model/*.c
-# TESTS_SOURCES=tests/*.c 
-# OBJECTS=$(SOURCES:.c=.o)
-
-# ifeq ($(shell uname), Linux)
-# 	CHECKFLAGS=-lcheck -lm -lpthread -lrt 
-# #-lsubunit
-# else
-# 	CHECKFLAGS=-lcheck -lm -lpthread
-# endif
-
-# all: clean install gcov_report
-
-# install:
-# 	@mkdir -p /build
-# 	@cd view && qmake && make && make clean && rm -rf Makefile && mv S21_SmartCalc_GUI.app ../../build/$(TARGET).app
-# 	@cp -R ../build/$(TARGET).app ~/Desktop/$(TARGET).app
-
-# uninstall:
-# clean:
-# dvi:
-# dist:
-
-# test: clean
-# 	$(GCC) $(CFALGS) $(TESTS_SOURCES) $(SOURCES) $(CHECKFLAGS) -o s21_smart_calc
-# 	./s21_smart_calc
-
-# gcov_report: test
-# 	$(GCC) $(CFALGS) $(TESTS_SOURCES) $(SOURCES) $(CHECKFLAGS) -fprofile-arcs -ftest-coverage -lgcov -o s21_smart_calc
-# 	./s21_smart_calc
-# 	lcov -t "./s21_smart_calc" -o report.info --no-external -c -d .
-# 	genhtml -o report report.info
-# 	open ./report/index.html
-
-# clean:
-# 	rm -rf s21_smart_calc *.a $(OBJECTS) a.out *.gcno *.gcda report report.info *.dSYM
-
-# valgrind: clean test
-# 	valgrind --tool=memcheck --leak-check=yes  ./s21_smart_calc
-
-# leaks: clean test
-# 	leaks -atExit -- ./s21_smart_calc | grep LEAK:
-
-# clangn:
-# 	clang-format -n -style=google $(SOURCES) headers/*.h $(TESTS_SOURCES) *.cpp	*.h view/*.cpp view/*.h
-
-# clangi:
-# 	clang-format -i -style=google $(SOURCES) headers/*.h $(TESTS_SOURCES) *.cpp	*.h view/*.cpp view/*.h

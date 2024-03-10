@@ -1,4 +1,4 @@
-#include "../headers/token_stack.h"
+#include "headers/token_stack.h"
 
 #include <stdio.h>
 
